@@ -1,0 +1,26 @@
+{
+  "name": "@apiance/primitives",
+  "version": "1.0.0",
+  "description": "A set of commons primitives used in the Apiance stack.",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha 'src/**/*.spec.js'"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:Apiance/primitives.git"
+  },
+  "author": "Apiance (contact@apiance.io)",
+  "license": "APIANCE-OS1",
+  "dependencies": {
+    "@js-joda/core": "^2.0.0",
+    "eventemitter2": "^6.3.1"
+  },
+  "devDependencies": {
+    "chai": "^4.2.0",
+    "eslint": "^6.8.0",
+    "eslint-config-airbnb-base": "^14.1.0",
+    "eslint-plugin-import": "^2.20.2",
+    "mocha": "^7.1.2"
+  }
+}
