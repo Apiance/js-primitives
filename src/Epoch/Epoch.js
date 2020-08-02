@@ -14,6 +14,7 @@ class Epoch {
 Epoch.fromNumber = function fromNumber(numberParam) {
   // if(numberParam < 9.9e9){
   if(numberParam < 9.9e9){
+    console.log('assume sec');
     // we assume it is s and transform to ms
     // - CAVEAT: Fail on msec < 1970-04-26 (interpret as sec)
     // - CAVEAT: Fail on sec > 2255-03-14 (interpret as ms)
