@@ -26,6 +26,10 @@ Epoch.fromString = function fromString(strParam) {
   this.date = new Date(strParam);
   return new Epoch({ date: this.date });
 };
+Epoch.toISOString = function toISOString() {
+  return new Date().toISOString();
+};
+Epoch.prototype.format = require('./methods/format');
 Epoch.prototype.inspect = require('./methods/inspect');
 Epoch.prototype.to = require('./methods/to');
 Epoch.prototype.toString = require('./methods/toString');
