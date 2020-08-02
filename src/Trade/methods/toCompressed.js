@@ -1,3 +1,6 @@
 module.exports = function toCompressed(){
-  return `Trade-${this.exchange}::${this.symbol}::${this.timestamp}::${this.id}::${this.rate}::${this.quantity}::${this.side}::${this.buyOrderId}::${this.sellOrderId}`;
+  const market = this.market;
+  const side = (this.side === 'BUY') ? 1 : -1;
+  const { timestamp, id, rate, quantity, buyOrderId, sellOrderId} = this;
+  return `Z::${market}::${timestamp}::${id}::${rate}::${quantity}::${side}::${buyOrderId}::${sellOrderId}`;
 }

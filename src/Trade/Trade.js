@@ -15,10 +15,6 @@ class Trade {
       symbol: props.symbol
     });
 
-    console.log(exchange);
-    // this.instrument = new Instrument({name:props.exchange || null});
-    // this.exchange = new Market({exchange:props.exchange || null});
-
     this.id = props.id || null;
 
     this.rate = props.rate || null;
@@ -27,7 +23,6 @@ class Trade {
 
     this.buyOrderId = props.buyOrderId || null;
     this.sellOrderId = props.sellOrderId || null;
-
 
     this.timestamp = new Epoch(props.timestamp || null);
   }
