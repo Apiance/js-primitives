@@ -60,5 +60,7 @@ class Candle {
     if(!this.closeTime) this.closeTime = calculateCloseTime(this);
   }
 };
+Candle.prototype.considerNewLastPrice = require('./methods/considerNewLastPrice');
+Candle.prototype.isWithinTimeframe = require('./methods/isWithinTimeframe');
 Candle.prototype.toCompressed = require('./methods/toCompressed');
 module.exports = Candle;

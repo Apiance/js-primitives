@@ -47,4 +47,14 @@ describe('Candle', function suite(){
   it('should to compress', function () {
     expect(candle.toCompressed()).to.deep.equal('C::Kraken::BTCUSD::1d::2020-08-02T00:00:00.000Z::10000::10111::10000::10100::42')
   });
+  it('should isWithinTimeframe', function () {
+    candle.isWithinTimeframe(new Epoch());
+    expect(candle.isWithinTimeframe(new Epoch())).to.equal(false);
+    expect(candle.isWithinTimeframe(new Epoch('2020-08-02T01:00:00.000Z'))).to.equal(true);
+  });
+  it('should update considerNewLastPrice', function () {
+    candle.considerNewLastPrice('10101', 1);
+    expect(candle.close).to.equal('10101')
+    expect(candle.volume).to.equal('43')
+  });
 });
