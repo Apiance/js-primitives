@@ -1,5 +1,9 @@
 module.exports = function to(unit = 's') {
   switch (unit) {
+    case "ns":
+    case "nanosecond":
+    case "nanoseconds":
+      return this.to('ms')*1000000;
     case 'ms':
     case 'milli':
     case 'millis':

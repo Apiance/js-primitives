@@ -19,6 +19,7 @@ describe('Epoch', function suite(){
     expect(epoch.to('ms')).to.lte(controlDate.valueOf()+10);
 
     expect(epoch.to('milliseconds')).to.equal(epoch.to('ms'));
+    expect(epoch.to('ns')).to.equal(epoch.to('nanosecond'));
 
     expect(epoch.to('s')).to.equal(Math.ceil(epoch.to('ms')/1000));
     expect(epoch.toString()).to.equal(controlDate.toISOString());
@@ -33,6 +34,12 @@ describe('Epoch', function suite(){
     expect(isoStr.toTimestamp('s')).to.equal(1596322800);
     expect(isoStr.toTimestamp('ms')).to.equal(1596322800000);
 
+    const nsecEpo = new Epoch(isoStr.toTimestamp('ns'));
+    expect(nsecEpo.toTimestamp()).to.equal('2020-08-01T23:00:00.000Z');
+    expect(nsecEpo.toTimestamp('ISO')).to.equal('2020-08-01T23:00:00.000Z');
+    expect(nsecEpo.toTimestamp('s')).to.equal(isoStr.to('s'));
+    expect(nsecEpo.toTimestamp('ms')).to.equal(1596322800000);
+
     const msecEpo = new Epoch(isoStr.toTimestamp('ms'));
     expect(msecEpo.toTimestamp()).to.equal('2020-08-01T23:00:00.000Z');
     expect(msecEpo.toTimestamp('ISO')).to.equal('2020-08-01T23:00:00.000Z');
@@ -44,6 +51,7 @@ describe('Epoch', function suite(){
     expect(secEpo.toTimestamp('ISO')).to.equal('2020-08-01T23:00:00.000Z');
     expect(secEpo.toTimestamp('s')).to.equal(isoStr.to('s'));
     expect(secEpo.toTimestamp('ms')).to.equal(1596322800000);
+    expect(secEpo.toTimestamp('ns')).to.equal(1596322800000000000);
 
     const timestampAsStr = new Epoch('1596417191996');
     console.log(timestampAsStr);

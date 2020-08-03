@@ -12,7 +12,10 @@ class Epoch {
 };
 
 Epoch.fromNumber = function fromNumber(numberParam) {
-  // if(numberParam < 9.9e9){
+  if(numberParam > 9.9e12){
+    console.log('assume ns');
+    return Epoch.fromNumber(numberParam / 1000000)
+  }
   if(numberParam < 9.9e9){
     console.log('assume sec');
     // we assume it is s and transform to ms
