@@ -24,7 +24,7 @@ Epoch.fromNumber = function fromNumber(numberParam) {
   return new Epoch({ date: this.date });
 };
 Epoch.fromString = function fromString(strParam) {
-  this.date = new Date(strParam);
+  this.date = new Date((Number.isNaN(Number(strParam))) ? strParam : Number(strParam));
   return new Epoch({ date: this.date });
 };
 Epoch.toISOString = function toISOString() {

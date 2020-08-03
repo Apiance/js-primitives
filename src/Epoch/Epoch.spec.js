@@ -45,6 +45,8 @@ describe('Epoch', function suite(){
     expect(secEpo.toTimestamp('s')).to.equal(isoStr.to('s'));
     expect(secEpo.toTimestamp('ms')).to.equal(1596322800000);
 
+    const timestampAsStr = new Epoch('1596417191996');
+    console.log(timestampAsStr);
   });
   it('should get format', function () {
     const epoch = new Epoch('2020-08-02T00:33:58.000Z')

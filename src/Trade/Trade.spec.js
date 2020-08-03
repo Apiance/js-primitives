@@ -12,7 +12,19 @@ describe('Trade', function suite(){
     buyOrderId: '837536680',
     sellOrderId: '837536822',
     timestamp: 1596417191996
-}
+};
+  const data2 = {
+    exchange: 'BINANCE',
+    symbol: 'ETHBTC',
+    timestamp: '1596417191996',
+    id: '185404189',
+    rate: '0.03425800',
+    quantity: '3.32600000',
+    side: 'SELL',
+    buyOrderId: '837536680',
+    sellOrderId: '837536822'
+  };
+
   it('should instantiates', ()=>{
     trade = new Trade();
     expect(trade).to.exist;
@@ -33,5 +45,7 @@ describe('Trade', function suite(){
   it('should work with multiple timestamp format', function () {
     const trade = new Trade(data);
     console.log(trade);
+    const trade2 = new Trade(data2);
+    console.log(trade2);
   });
 });

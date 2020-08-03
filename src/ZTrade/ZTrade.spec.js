@@ -38,5 +38,6 @@ describe('ZTrade', function suite(){
   });
   it('should work with different format', function () {
     const ztrade = new ZTrade(zippedTradeStr2);
+    console.log(ztrade.toTrade());
   });
 });
