@@ -11,7 +11,7 @@ const isString = require('../utils/isString')
 
 module.exports = function considerNewLastPrice(lastPrice, amount = null){
   if(!lastPrice){
-    this._logger.error(`Unexpected missing price ${lastPrice} (amt : ${amount})`);
+    console.error(`Unexpected missing price: ${lastPrice} (amt : ${amount})`);
     return false;
   }
   this.close = lastPrice;
@@ -22,7 +22,7 @@ module.exports = function considerNewLastPrice(lastPrice, amount = null){
     }
     this.volume = new Big(this.volume).plus(amount).toString();
   }else {
-    this._logger.error(`Unexpected missing amount ${amount} (last: ${lastPrice}`);
+    console.error(`Unexpected missing amount: ${amount} (last: ${lastPrice}`);
   }
 
   if(this.open===null) this.open = lastPrice;

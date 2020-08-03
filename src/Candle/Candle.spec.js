@@ -56,5 +56,9 @@ describe('Candle', function suite(){
     candle.considerNewLastPrice('10101', 1);
     expect(candle.close).to.equal('10101')
     expect(candle.volume).to.equal('43')
+    candle.considerNewLastPrice(null, 1);
+    expect(candle.close).to.equal('10101')
+    expect(candle.volume).to.equal('43')
+
   });
 });

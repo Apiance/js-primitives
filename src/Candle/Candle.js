@@ -23,7 +23,7 @@ const defaultOpts = {
 };
 
 class Candle {
-  constructor(opts = defaultOpts, logger = console) {
+  constructor(opts = defaultOpts) {
     let exchange = new Exchange({ name: opts.exchange || defaultOpts.exchange });
 
     this.market = new Market(opts.market || {
