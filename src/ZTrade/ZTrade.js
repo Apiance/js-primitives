@@ -3,10 +3,11 @@ class ZTrade {
     if(props){
       if(props.constructor === String){
         return ZTrade.fromString(props);
-      }else if(props.constructor === Object || props.constructor === ZTrade) {
+      }else if(props.constructor === Object && props.z || props.constructor === ZTrade) {
         this.z = props.z;
       } else {
-        return ZTrade.fromTrade(props);
+        if(props.toCompressed) return ZTrade.fromTrade(props);
+        return ZTrade.fromObject(props);
       }
     }
   }
@@ -22,6 +23,10 @@ ZTrade.fromString = function(str) {
 }
 ZTrade.fromTrade = function(trade) {
   return new ZTrade(trade.toCompressed())
+}
+ZTrade.fromObject = function(object) {
+  const z = `Z::${object.market}::${object.timestamp}::${object.id}::${object.rate}::${object.quantity}::${object.side}::${object.buyOrderId}::${object.sellOrderId}`;
+  return new ZTrade(z)
 }
 
 ZTrade.prototype.toTrade = require('./methods/toTrade');

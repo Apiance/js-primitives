@@ -3,10 +3,12 @@ class ZCandle {
     if(props){
       if(props.constructor === String){
         return ZCandle.fromString(props);
-      }else if(props.constructor === Object || props.constructor === ZCandle) {
+      }else if(props.constructor === Object && props.c || props.constructor === ZCandle) {
         this.c = props.c;
       } else {
-        return ZCandle.fromTrade(props);
+        const fromCandle = ZCandle.fromCandle(props);
+        if(fromCandle) return fromCandle;
+        return ZCandle.fromObject(props);
       }
     }
   }
@@ -20,8 +22,12 @@ ZCandle.fromString = function(str) {
   }
   return new ZCandle({c: str});
 }
-ZCandle.fromTrade = function(candle) {
+ZCandle.fromCandle = function(candle) {
   return new ZCandle(candle.toCompressed())
+}
+ZCandle.fromObject = function(object) {
+  const z = `C::${object.market}::${object.openTime}::${object.open}::${object.high}::${object.low}::${object.close}::${object.volume}`;
+  return new ZTrade(z)
 }
 
 ZCandle.prototype.toCandle = require('./methods/toCandle');
