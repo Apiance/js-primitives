@@ -1,6 +1,7 @@
 module.exports = {
   Asset: require('./src/Asset/Asset'),
   Candle: require('./src/Candle/Candle'),
+  CandleSet: require('./src/CandleSet/CandleSet'),
   Epoch: require('./src/Epoch/Epoch'),
   Exchange: require('./src/Exchange/Exchange'),
   Instrument: require('./src/Instrument/Instrument'),
