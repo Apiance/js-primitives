@@ -1,6 +1,6 @@
-const Candle = require('../../Candle/Candle');
-
 module.exports = function toCandle() {
+  const Candle = require('../../Candle/Candle');
+
   const { c } = this;
   const opts = {};
 

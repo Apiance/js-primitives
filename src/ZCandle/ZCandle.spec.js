@@ -3,9 +3,9 @@ const ZCandle = require('./ZCandle');
 const Candle = require('../Candle/Candle');
 
 describe('ZCandle', function suite(){
-  const zippedCandleStr = 'C::Kraken::BTCUSD::1d::2020-08-02T00:00:00.000Z::10000::10111::10000::10100::42';
+  const zippedCandleStr = 'C::KRAKEN::BTCUSD::1d::2020-08-02T00:00:00.000Z::10000::10111::10000::10100::42';
   const candle = new Candle({
-    exchange: 'Kraken',
+    exchange: 'KRAKEN',
     symbol: 'BTCUSD',
     timeframe: '1d',
     timestamp: '2020-08-02T00:00:00.000Z',
@@ -30,6 +30,13 @@ describe('ZCandle', function suite(){
   it('should convert to trade', function () {
     const zcandle = new ZCandle(zippedCandleStr);
     expect(zcandle.toCandle()).to.deep.equal(candle);
+  });
+  it('should create from candle', function () {
+    const zcandle = new ZCandle(zippedCandleStr);
+    const candle = zcandle.toCandle();
+
+    expect(new ZCandle(candle)).to.deep.equal(zcandle);
+    console.log(zcandle);
   });
   it('should clone', function () {
     const zcandle = new ZCandle(zippedCandleStr);

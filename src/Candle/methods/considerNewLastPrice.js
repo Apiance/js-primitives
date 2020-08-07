@@ -1,3 +1,4 @@
+const MissingParameterError = require('../errors/MissingParameter')
 const { Big } = require('big.js');
 const isNum = require('../utils/isNum')
 const isString = require('../utils/isString')
@@ -11,8 +12,7 @@ const isString = require('../utils/isString')
 
 module.exports = function considerNewLastPrice(lastPrice, amount = null){
   if(!lastPrice){
-    console.error(`Unexpected missing price: ${lastPrice} (amt : ${amount})`);
-    return false;
+    throw new MissingParameterError('lastPrice', {lastPrice, amount});
   }
   this.close = lastPrice;
   if(isString(amount)) amount = Number(amount);
@@ -22,7 +22,7 @@ module.exports = function considerNewLastPrice(lastPrice, amount = null){
     }
     this.volume = new Big(this.volume).plus(amount).toString();
   }else {
-    console.error(`Unexpected missing amount: ${amount} (last: ${lastPrice}`);
+    // throw new MissingParameterError('amount', {lastPrice, amount});
   }
 
   if(this.open===null) this.open = lastPrice;

@@ -1,9 +1,10 @@
 const { expect } = require('chai');
 const Candle = require('./Candle');
+const ZCandle = require('../ZCandle/ZCandle');
 const Epoch = require('../Epoch/Epoch')
 describe('Candle', function suite(){
   const opts = {
-    exchange: "Kraken",
+    exchange: "KRAKEN",
     symbol: "BTCUSD",
     timeframe: '1d',
     timestamp: '2020-08-02T00:00:00.142Z',
@@ -15,13 +16,12 @@ describe('Candle', function suite(){
   }
   let candle;
   it('should instantiates with now as default', ()=>{
-    const candle = new Candle();
-    expect(candle).to.exist;
+    const candleDefault = new Candle();
+    expect(candleDefault).to.exist;
   })
   it('should init from param', function () {
     candle = new Candle(opts);
-
-    expect(candle.market.exchange.toString()).to.equal('Kraken');
+    expect(candle.market.exchange.toString()).to.equal('KRAKEN');
     expect(candle.market.symbol.toString()).to.equal('BTCUSD');
     expect(candle.open).to.equal('10000');
     expect(candle.close).to.equal('10100');
@@ -32,7 +32,7 @@ describe('Candle', function suite(){
     expect(candle.openTime).to.deep.equal(new Epoch('2020-08-02T00:00:00.000Z'));
     expect(candle.closeTime).to.deep.equal(new Epoch('2020-08-02T23:59:59.999Z'));
 
-    expect(candle.$id).to.equal('Kraken/BTCUSD/1d/2020/08/02/2020-08-02T00:00:00.000Z');
+    expect(candle.getId()).to.equal('KRAKEN/BTCUSD/1d/2020/08/02/2020-08-02T00:00:00.000Z');
   });
   it('should calculate closeTime', function () {
     const candleDay = new Candle({timeframe: '1d', openTime: opts.timestamp});
@@ -44,8 +44,15 @@ describe('Candle', function suite(){
     const candleMin = new Candle({timeframe: '1m', openTime: opts.timestamp});
     expect(candleMin.closeTime).to.deep.equal(new Epoch('2020-08-02T00:00:59.999Z'));
   });
+  it('should to ZCandle', function () {
+    expect(candle.toZCandle()).to.deep.equal(new ZCandle('C::KRAKEN::BTCUSD::1d::2020-08-02T00:00:00.000Z::10000::10111::10000::10100::42'))
+  });
   it('should to compress', function () {
-    expect(candle.toCompressed()).to.deep.equal('C::Kraken::BTCUSD::1d::2020-08-02T00:00:00.000Z::10000::10111::10000::10100::42')
+    expect(candle.toCompressed()).to.deep.equal('C::KRAKEN::BTCUSD::1d::2020-08-02T00:00:00.000Z::10000::10111::10000::10100::42')
+  });
+  it('should from compressed', function () {
+    const candleFromZCandle = new Candle(candle.toZCandle());
+    expect(candleFromZCandle).to.deep.equal(candle);
   });
   it('should isWithinTimeframe', function () {
     candle.isWithinTimeframe(new Epoch());
@@ -56,9 +63,12 @@ describe('Candle', function suite(){
     candle.considerNewLastPrice('10101', 1);
     expect(candle.close).to.equal('10101')
     expect(candle.volume).to.equal('43')
-    candle.considerNewLastPrice(null, 1);
-    expect(candle.close).to.equal('10101')
+    expect(()=>candle.considerNewLastPrice(null, 1)).to.throw('Missing parameter lastPrice. Supplied: {"lastPrice":null,"amount":1}');
+    candle.considerNewLastPrice(1, null);
+    expect(candle.close).to.equal(1);
     expect(candle.volume).to.equal('43')
-
+  });
+  it('should toJSON', function () {
+    console.log(JSON.stringify(candle));
   });
 });

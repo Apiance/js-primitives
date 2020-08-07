@@ -1,6 +1,5 @@
 const _ = require('lodash');
 const Epoch = require('../Epoch/Epoch');
-const generateId = require('./utils/generateId');
 const Exchange = require('../Exchange/Exchange');
 const Market = require('../Market/Market');
 const calculateCloseTime = require('./utils/calculateCloseTime');
@@ -14,21 +13,30 @@ const defaultOpts = {
   high: null,
   volume: null,
   timestamp: null,
-  $meta: {
-    id: null,
-    rcvTimestamp: null,
-    endTimestamp: null,
-    startTimestamp: null,
-  }
 };
-
+const fromZCandle = (opts) => {
+  // We put it here to avoid circ dependency
+  const ZCandle = require('../ZCandle/ZCandle');
+  if(opts.constructor !== ZCandle) throw new Error('Cannot fromZCandle: Is not a ZCandle');
+  return opts.toCandle();
+}
+const fromString = (opts) =>{
+  console.log('====FROMS TRING');
+  console.log(opts);
+}
 class Candle {
   constructor(opts = defaultOpts) {
-    let exchange = new Exchange({ name: opts.exchange || defaultOpts.exchange });
+    if(opts.constructor === String){
+      return fromString(opts)
+    }else if(opts.constructor !== Object){
+      return fromZCandle(opts)
+    }
 
     this.market = new Market(opts.market || {
-      exchange,
-      symbol: opts.symbol || defaultOpts.symbol
+      exchange: opts.exchange || defaultOpts.exchange,
+      symbol: opts.symbol || defaultOpts.symbol,
+      quoteSymbol: opts.quoteSymbol || null,
+      baseSymbol: opts.baseSymbol || null
     });
 
     this.timeframe = _.get(opts, 'timeframe', defaultOpts.timeframe);
@@ -37,6 +45,8 @@ class Candle {
     this.close = _.get(opts, 'close', defaultOpts.close);
     this.low = _.get(opts, 'low', defaultOpts.low);
     this.high = _.get(opts, 'high', defaultOpts.high);
+
+    // Volume is always expressed in quoteVolume (like other price value are)
     this.volume = _.get(opts, 'volume', defaultOpts.volume);
 
     const openTime = (opts.openTime)
@@ -56,11 +66,12 @@ class Candle {
     // Todo: calculate end time from ...
     this.closeTime = (closeTime) ? new Epoch(closeTime) : null;
 
-    this.$id = generateId(this.market, this.timeframe, this.openTime);
     if(!this.closeTime) this.closeTime = calculateCloseTime(this);
   }
 };
 Candle.prototype.considerNewLastPrice = require('./methods/considerNewLastPrice');
 Candle.prototype.isWithinTimeframe = require('./methods/isWithinTimeframe');
 Candle.prototype.toCompressed = require('./methods/toCompressed');
+Candle.prototype.toZCandle = require('./methods/toZCandle');
+Candle.prototype.getId = require('./methods/getId');
 module.exports = Candle;
