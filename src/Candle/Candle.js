@@ -21,8 +21,11 @@ const fromZCandle = (opts) => {
   return opts.toCandle();
 }
 const fromString = (opts) =>{
-  console.log('====FROMS TRING');
-  console.log(opts);
+  const ZCandle = require('../ZCandle/ZCandle');
+  if(!opts.slice(0,3) === 'C::'){
+    throw new Error('Unrecognized pattern');
+  }
+  return new ZCandle({c: opts}).toCandle();
 }
 class Candle {
   constructor(opts = defaultOpts) {
@@ -67,6 +70,8 @@ class Candle {
     this.closeTime = (closeTime) ? new Epoch(closeTime) : null;
 
     if(!this.closeTime) this.closeTime = calculateCloseTime(this);
+
+    if(opts.trades) this.trades = opts.trades;
   }
 };
 Candle.prototype.considerNewLastPrice = require('./methods/considerNewLastPrice');

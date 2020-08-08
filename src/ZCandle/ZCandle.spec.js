@@ -42,4 +42,9 @@ describe('ZCandle', function suite(){
     const zcandle = new ZCandle(zippedCandleStr);
     const zcandle1 = new ZCandle(zcandle);
   });
+  it('should from full zipped', function () {
+    const fullZippedStr = `C::KRAKEN::BTCUSD::1d::2020-08-02T00:00:00.000Z::10000::10111::10000::10100::42::60`;
+    console.log(new Candle(fullZippedStr));
+    console.log(new Candle(fullZippedStr));
+  });
 });

@@ -71,4 +71,20 @@ describe('Candle', function suite(){
   it('should toJSON', function () {
     console.log(JSON.stringify(candle));
   });
+  it('should deal with trades', function () {
+    const x = {
+        market: "KRAKEN::BTCUSD",
+        timeframe: '1d',
+        openTime: '2020-08-02T00:00:00.142Z',
+        closeTime: '2020-08-02T00:59:59.999Z',
+        open: '10000',
+        close: '10100',
+        high: '10111',
+        low: '10000',
+        volume: '42',
+        trades: 60
+    };
+    const fullCandle = new Candle(x);
+    expect(fullCandle.toCompressed()).to.equal('C::KRAKEN::BTCUSD::1d::2020-08-02T00:00:00.000Z::10000::10111::10000::10100::42::60');
+  });
 });

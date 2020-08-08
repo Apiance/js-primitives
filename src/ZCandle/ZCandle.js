@@ -26,8 +26,14 @@ ZCandle.fromCandle = function(candle) {
   return new ZCandle(candle.toCompressed())
 }
 ZCandle.fromObject = function(object) {
-  const z = `C::${object.market}::${object.openTime}::${object.open}::${object.high}::${object.low}::${object.close}::${object.volume}`;
-  return new ZTrade(z)
+  let z = `C::${object.market}::${object.openTime}::${object.open}::${object.high}::${object.low}::${object.close}`;
+  if(object.volume){
+    z += `::${object.volume}`;
+    if(object.trades) {
+      z += `::${object.trades}`;
+    }
+  }
+  return new ZCandle(z)
 }
 
 ZCandle.prototype.toCandle = require('./methods/toCandle');
