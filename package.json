@@ -1,6 +1,6 @@
 {
   "name": "@apiance/primitives",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "description": "A set of commons primitives used in the Apiance stack.",
   "main": "index.js",
   "scripts": {
@@ -13,7 +13,6 @@
   "author": "Apiance (contact@apiance.io)",
   "license": "APIANCE-OS1",
   "dependencies": {
-    "@js-joda/core": "^3.0.0",
     "big.js": "^5.2.2",
     "eventemitter2": "^6.4.3",
     "lodash.get": "^4.4.2",
