@@ -6,9 +6,13 @@ class ZCandle {
       }else if(props.constructor === Object && props.c || props.constructor === ZCandle) {
         this.c = props.c;
       } else {
-        const fromCandle = ZCandle.fromCandle(props);
-        if(fromCandle) return fromCandle;
-        return ZCandle.fromObject(props);
+        try {
+          const fromCandle = ZCandle.fromCandle(props);
+          return fromCandle;
+        }
+        catch (e) {
+          return ZCandle.fromObject(props);
+        }
       }
     }
   }

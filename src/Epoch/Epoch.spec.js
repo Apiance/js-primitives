@@ -68,4 +68,18 @@ describe('Epoch', function suite(){
     expect(epoch.format('mm')).to.equal('33');
     expect(epoch.format('ss')).to.equal('58');
   });
+  it('should get to start of unit', function () {
+    const e1 = new Epoch('2020-08-02T00:33:58.130Z')
+    expect(e1.startOf('minute').date).to.equal('2020-08-02T00:33:00.000Z');
+  });
+  it('should get to end of unit', function () {
+    const e1 = new Epoch('2020-08-02T00:33:58.130Z')
+    expect(e1.endOf('minute').date).to.equal('2020-08-02T00:33:59.999Z');
+  });
+  it('should add minutes', function () {
+    const e1 = new Epoch('2020-08-02T00:33:58.130Z')
+    expect(e1.add('day',1).date).to.equal('2020-08-03T00:33:58.130Z');
+    expect(e1.add('hour',1).date).to.equal('2020-08-03T01:33:58.130Z');
+    // expect(e1.add('minute',1).date).to.equal('2020-08-03T01:34:58.130Z');
+  });
 });

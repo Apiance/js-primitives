@@ -9,7 +9,7 @@ module.exports = function to(unit = 's') {
     case 'millis':
     case 'millisecond':
     case 'milliseconds':
-      return this.date.valueOf();
+      return new Date(this.date).valueOf();
     case 's':
     case 'second':
     case 'seconds':
