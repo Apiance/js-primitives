@@ -25,19 +25,11 @@ describe('Epoch.set', function suite(){
     set.call(mockDate, 'second', '02.000');
     expect(mockDate.date).to.equal('2022-03-13T02:02:02.000Z');
 
+    set.call(mockDate, 'millisecond', '590');
+    expect(mockDate.date).to.equal('2022-03-13T02:02:02.590Z');
+    set.call(mockDate, 'millisecond', '0');
+    expect(mockDate.date).to.equal('2022-03-13T02:02:02.000Z');
 
-
-    // const mockDateOffset = {
-    //   date: '2020-08-02T02:33:58.000+04'
-    // }
-    // expect(get.call(mockDateOffset, 'date')).to.equal('2020-08-02');
-    // expect(get.call(mockDateOffset, 'time')).to.equal('02:33:58.000+04');
-    // expect(get.call(mockDateOffset, 'year')).to.equal('2020');
-    // expect(get.call(mockDateOffset, 'month')).to.equal('08');
-    // expect(get.call(mockDateOffset, 'day')).to.equal('02');
-    // expect(get.call(mockDateOffset, 'hour')).to.equal('02');
-    // expect(get.call(mockDateOffset, 'minute')).to.equal('33');
-    // expect(get.call(mockDateOffset, 'second')).to.equal('58.000');
-    // expect(get.call(mockDateOffset, 'timezone')).to.equal('+04');
+   // TODO Set offset
   });
 });

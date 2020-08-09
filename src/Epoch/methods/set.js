@@ -28,6 +28,11 @@ module.exports = function set(unit, value) {
     case "second":
       this.date = `${splittedTime[0]}:${splittedTime[1]}:${stringifiedValue}${this.get('timezone')}`;
       return this;
+    case "millisecond":
+
+
+      this.date = `${splittedTime[0]}:${splittedTime[1]}:${splittedTime[2].split('.')[0]}.${stringifiedValue.padStart(3,'0')}${this.get('timezone')}`;
+      return this;
     default:
       throw new Error(`Not supported unit: ${unit}`)
   }
