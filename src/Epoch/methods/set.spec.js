@@ -22,9 +22,8 @@ describe('Epoch.set', function suite(){
     expect(mockDate.date).to.equal('2022-03-13T02:34:59.010Z');
     set.call(mockDate, 'minute', '02');
     expect(mockDate.date).to.equal('2022-03-13T02:02:59.010Z');
-    set.call(mockDate, 'second', '02.000');
-    expect(mockDate.date).to.equal('2022-03-13T02:02:02.000Z');
-
+    set.call(mockDate, 'second', '02');
+    expect(mockDate.date).to.equal('2022-03-13T02:02:02.010Z');
     set.call(mockDate, 'millisecond', '590');
     expect(mockDate.date).to.equal('2022-03-13T02:02:02.590Z');
     set.call(mockDate, 'millisecond', '0');

@@ -13,7 +13,8 @@ describe('Epoch.get', function suite(){
     expect(get.call(mockDate, 'day')).to.equal('02');
     expect(get.call(mockDate, 'hour')).to.equal('00');
     expect(get.call(mockDate, 'minute')).to.equal('33');
-    expect(get.call(mockDate, 'second')).to.equal('58.000');
+    expect(get.call(mockDate, 'second')).to.equal('58');
+    expect(get.call(mockDate, 'millisecond')).to.equal('000');
     expect(get.call(mockDate, 'timezone')).to.equal('Z');
 
     const mockDateOffset = {
@@ -26,7 +27,8 @@ describe('Epoch.get', function suite(){
     expect(get.call(mockDateOffset, 'day')).to.equal('02');
     expect(get.call(mockDateOffset, 'hour')).to.equal('02');
     expect(get.call(mockDateOffset, 'minute')).to.equal('33');
-    expect(get.call(mockDateOffset, 'second')).to.equal('58.000');
+    expect(get.call(mockDateOffset, 'second')).to.equal('58');
+    expect(get.call(mockDateOffset, 'millisecond')).to.equal('000');
     expect(get.call(mockDateOffset, 'timezone')).to.equal('+04');
   });
 });

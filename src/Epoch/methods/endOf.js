@@ -22,17 +22,20 @@ module.exports = function endOf(unit) {
     case "day":
       this.set('hour', '23');
       this.set('minute', '59');
-      this.set('second', '59.999');
+      this.set('second', '59');
+      this.set('millisecond', '999');
       return this;
     case "hour":
       this.set('minute', '59');
-      this.set('second', '59.999');
+      this.set('second', '59');
+      this.set('millisecond', '999');
       return this;
     case "minute":
-      this.set('second', '59.999');
+      this.set('second', '59');
+      this.set('millisecond', '999');
       return this;
     case "second":
-      this.set('second',  this.get('second').slice(0,2)+'.999');
+      this.set('millisecond', '999');
       return this;
     default:
       throw new Error(`Not handled unit ${unit}`);

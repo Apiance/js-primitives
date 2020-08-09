@@ -1,4 +1,6 @@
 module.exports = function get(unit) {
+  let subPart;
+  let lastChar;
   switch (unit) {
     case "timezone":
       const lastLetter = this.date[this.date.length-1];
@@ -26,17 +28,19 @@ module.exports = function get(unit) {
     case "minute":
       return this.date.split(':')[1];
     case "second":
-      const subpart = this.date.split(':')[2];
-      const lastChar = subpart[subpart.length-1];
+       subPart = this.date.split(':')[2];
+       return subPart.split('.')[0];
+    case "millisecond":
+      subPart = this.date.split('.')[1];
+      lastChar = subPart[subPart.length-1];
       if(Number.isNaN(Number(lastChar))){
-        return subpart.slice(0, -1);
+        return subPart.slice(0, -1);
       }else {
-
-        if(subpart.includes('+')){
-          return subpart.split('+')[0];
+        if(subPart.includes('+')){
+          return subPart.split('+')[0];
         }
       }
-      return subpart;
+      break;
     default:
       throw new Error(`Not supproted unit: ${unit}`)
   }

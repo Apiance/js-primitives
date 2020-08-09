@@ -7,7 +7,7 @@ class Epoch {
         return Epoch.fromNumber(props);
       }
     }
-    this.date = (props && props.date) ? props.date : new Date().toISOString();
+    this.date = (props && props.date) ? props.date : Epoch.toISOString();
   }
 };
 
@@ -29,7 +29,6 @@ Epoch.fromString = function fromString(strParam) {
   if(!Number.isNaN(Number(strParam))) return Epoch.fromNumber(Number(strParam));
 
   const date = new Date(strParam);
-
   return new Epoch({ date: date.toISOString() });
 };
 Epoch.toISOString = function toISOString() {

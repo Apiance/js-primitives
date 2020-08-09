@@ -3,7 +3,6 @@ const Keys = require('../../Keys/Keys');
 module.exports = function addKeys(keys){
 
   if(keys.constructor !== Keys){
-    console.log({keys})
     throw new Error('Not a keys');
   }
   if(this.keys[keys.name]) throw new Error(`Already existing keys for ${keys.name}`);

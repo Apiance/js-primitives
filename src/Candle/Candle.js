@@ -52,17 +52,15 @@ class Candle {
     // Volume is always expressed in quoteVolume (like other price value are)
     this.volume = _.get(opts, 'volume', defaultOpts.volume);
 
-    const openTime = (opts.openTime)
-      ? opts.openTime
-      : (opts.timestamp)
-        ? opts.timestamp
-        : Epoch.toISOString();
+    let openTime = opts.openTime;
+    if(opts.timestamp) openTime = opts.timestamp;
+    if(!openTime) openTime = Epoch.toISOString();
 
     this.openTime = new Epoch(openTime);
 
-    this.openTime.date.setMilliseconds(0);
+    this.openTime.set('millisecond','0');
     if(!this.timeframe || this.timeframe.slice(-1) !== 's'){
-      this.openTime.date.setSeconds(0);
+      this.openTime.set('second',"0");
     }
 
     const closeTime = (opts.closeTime) ? opts.closeTime : null;

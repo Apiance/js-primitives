@@ -26,11 +26,10 @@ module.exports = function set(unit, value) {
       this.date = `${splittedTime[0]}:${stringifiedValue}:${splittedTime[2]}`;
       return this;
     case "second":
-      this.date = `${splittedTime[0]}:${splittedTime[1]}:${stringifiedValue}${this.get('timezone')}`;
+      const milli = this.get('millisecond');
+      this.date = `${splittedTime[0]}:${splittedTime[1]}:${stringifiedValue.padStart(2,'0')}.${milli}${this.get('timezone')}`;
       return this;
     case "millisecond":
-
-
       this.date = `${splittedTime[0]}:${splittedTime[1]}:${splittedTime[2].split('.')[0]}.${stringifiedValue.padStart(3,'0')}${this.get('timezone')}`;
       return this;
     default:
