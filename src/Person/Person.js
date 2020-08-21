@@ -1,6 +1,6 @@
-class Asset {
+class Person {
   constructor(props = {}) {
     Object.assign(this, props);
   }
 };
-module.exports = Asset;
+module.exports = Person;

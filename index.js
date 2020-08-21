@@ -8,6 +8,8 @@ module.exports = {
   KeyChain: require('./src/KeyChain/KeyChain'),
   Keys: require('./src/Keys/Keys'),
   Market: require('./src/Market/Market'),
+  Organization: require('./src/Organization/Organization'),
+  Person: require('./src/Person/Person'),
   Trade: require('./src/Trade/Trade'),
   ZCandle: require('./src/ZCandle/ZCandle'),
   ZTrade: require('./src/ZTrade/ZTrade'),

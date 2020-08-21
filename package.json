@@ -1,6 +1,6 @@
 {
   "name": "@apiance/primitives",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "description": "A set of commons primitives used in the Apiance stack.",
   "main": "index.js",
   "scripts": {
