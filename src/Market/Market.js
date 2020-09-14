@@ -7,8 +7,9 @@ class Market {
     if(props.constructor === String){
       return fromString(props);
     }
-    this.exchange = props?.exchange?.toString().toUpperCase() || null;
-    this.symbol = props?.symbol?.toString().toUpperCase() || null;
+    if(!props) throw new Error('Expected props to create Market');
+    this.exchange = props.exchange.toString().toUpperCase() || null;
+    this.symbol = props.symbol.toString().toUpperCase() || null;
 
     if(props.quoteSymbol) {
       this.quoteSymbol = props.quoteSymbol;
