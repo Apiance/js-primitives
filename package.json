@@ -1,5 +1,5 @@
 {
-  "name": "@apiance/primitives",
+  "name": "@apiance/js-primitives",
   "version": "1.2.1",
   "description": "A set of commons primitives used in the Apiance stack.",
   "main": "index.js",
@@ -8,7 +8,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git@apiance.github.com:Apiance/primitives.git"
+    "url": "git@apiance.github.com:Apiance/js-primitives.git"
   },
   "author": "Apiance (contact@apiance.io)",
   "license": "APIANCE-OS1",
