@@ -6,7 +6,7 @@ const calculateCloseTime = require('./utils/calculateCloseTime');
 const defaultOpts = {
   exchange: null,
   symbol: null,
-  timeframe: null,
+  interval: null,
   open: null,
   close: null,
   low: null,
@@ -25,6 +25,9 @@ const fromString = (opts) =>{
   if(!opts.slice(0,3) === 'C::'){
     throw new Error('Unrecognized pattern');
   }
+  if(opts[0] === '{'){
+    return new Candle(JSON.parse(opts));
+  }
   return new ZCandle({c: opts}).toCandle();
 }
 class Candle {
@@ -36,13 +39,14 @@ class Candle {
     }
 
     this.market = new Market(opts.market || {
-      exchange: opts.exchange || defaultOpts.exchange,
-      symbol: opts.symbol || defaultOpts.symbol,
-      quoteSymbol: opts.quoteSymbol || null,
-      baseSymbol: opts.baseSymbol || null
+      exchange: opts.exchange || null,
+      symbol: opts.symbol || null,
+      type: opts.type || null,
+      quote: opts.quote || null,
+      base: opts.base || null
     });
 
-    this.timeframe = _.get(opts, 'timeframe', defaultOpts.timeframe);
+    this.interval = _.get(opts, 'interval', defaultOpts.interval);
 
     this.open = _.get(opts, 'open', defaultOpts.open);
     this.close = _.get(opts, 'close', defaultOpts.close);
@@ -59,7 +63,7 @@ class Candle {
     this.openTime = new Epoch(openTime);
 
     this.openTime.set('millisecond','0');
-    if(!this.timeframe || this.timeframe.slice(-1) !== 's'){
+    if(!this.interval || this.interval.slice(-1) !== 's'){
       this.openTime.set('second',"0");
     }
 
@@ -73,7 +77,7 @@ class Candle {
   }
 };
 Candle.prototype.considerNewLastPrice = require('./methods/considerNewLastPrice');
-Candle.prototype.isWithinTimeframe = require('./methods/isWithinTimeframe');
+Candle.prototype.isWithinInterval = require('./methods/isWithinInterval');
 Candle.prototype.toCompressed = require('./methods/toCompressed');
 Candle.prototype.toZCandle = require('./methods/toZCandle');
 Candle.prototype.getId = require('./methods/getId');

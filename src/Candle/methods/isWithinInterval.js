@@ -4,7 +4,7 @@ const Epoch = require('../../Epoch/Epoch')
  * @param timestamp - In nanoseconds
  * @return {boolean}
  */
-module.exports = function isWithinTimeframe(timestamp){
+module.exports = function isWithininterval(timestamp){
   const ts = new Epoch(timestamp);
   const startTs = this.openTime;
   const endTs = this.closeTime;

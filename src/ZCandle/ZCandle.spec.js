@@ -7,7 +7,7 @@ describe('ZCandle', function suite(){
   const candle = new Candle({
     exchange: 'KRAKEN',
     symbol: 'BTCUSD',
-    timeframe: '1d',
+    interval: '1d',
     timestamp: '2020-08-02T00:00:00.000Z',
     open:'10000',
     high:'10111',

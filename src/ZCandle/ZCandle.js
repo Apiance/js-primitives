@@ -21,8 +21,12 @@ class ZCandle {
   }
 }
 ZCandle.fromString = function(str) {
+  console.log({str});
   if(!str.slice(0,3) === 'C::'){
     throw new Error('Unrecognized pattern');
+  }
+  if(str[0] === '{'){
+    return new ZCandle(JSON.parse(str));
   }
   return new ZCandle({c: str});
 }
@@ -30,9 +34,9 @@ ZCandle.fromCandle = function(candle) {
   return new ZCandle(candle.toCompressed())
 }
 ZCandle.fromObject = function(object) {
-  let z = `C::${object.market}::${object.openTime}::${object.open}::${object.high}::${object.low}::${object.close}`;
-  if(object.volume){
-    z += `::${object.volume}`;
+  let z = `C::${object.market}::${object.interval}::${object.openTime}::${object.open}::${object.high}::${object.low}::${object.close}`;
+  if(object.quoteVolume){
+    z += `::${object.quoteVolume}`;
     if(object.trades) {
       z += `::${object.trades}`;
     }
