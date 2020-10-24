@@ -13,17 +13,17 @@
   "author": "Apiance (contact@apiance.io)",
   "license": "APIANCE-OS1",
   "dependencies": {
-    "big.js": "^5.2.2",
+    "big.js": "^6.0.1",
     "eventemitter2": "^6.4.3",
     "lodash.get": "^4.4.2",
-    "pino": "^6.5.0",
-    "pino-pretty": "^4.1.0"
+    "pino": "^6.7.0",
+    "pino-pretty": "^4.3.0"
   },
   "devDependencies": {
     "chai": "^4.2.0",
-    "eslint": "^7.6.0",
+    "eslint": "^7.12.0",
     "eslint-config-airbnb-base": "^14.2.0",
-    "eslint-plugin-import": "^2.22.0",
-    "mocha": "^8.1.1"
+    "eslint-plugin-import": "^2.22.1",
+    "mocha": "^8.2.0"
   }
 }
