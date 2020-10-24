@@ -4,8 +4,9 @@ module.exports = function toTrade() {
   const { z } = this;
   const opts = {};
 
-  const optsProps = [null, 'exchange', 'symbol', 'timestamp', 'id', 'rate', 'quantity','side', 'buyOrderId', 'sellOrderId'];
+  const optsProps = [null, 'exchange', 'marketId', 'timestamp', 'id', 'rate', 'quantity','side', 'buyOrderId', 'sellOrderId'];
   z.split('::').map((val, index, arr)=>{
+    console.log(val);
     if(index === 0){
       if(val !== 'Z') throw new Error('Wrong format');
       else return;

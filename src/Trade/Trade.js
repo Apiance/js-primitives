@@ -1,4 +1,3 @@
-const Exchange = require('../Exchange/Exchange');
 const Market = require('../Market/Market');
 const Epoch = require('../Epoch/Epoch');
 class Trade {
@@ -8,12 +7,7 @@ class Trade {
    * @param {Date.toUTC} props.timestamp - UTC ISO Timestamp
    */
   constructor(props = {}) {
-    let exchange = new Exchange({name: props.exchange || null})
-
-    this.market = new Market({
-      exchange,
-      symbol: props.symbol
-    });
+    this.market = new Market(props.market);
 
     this.id = props.id || null;
 
