@@ -34,6 +34,12 @@ Epoch.fromString = function fromString(strParam) {
 Epoch.toISOString = function toISOString() {
   return new Date().toISOString();
 };
+Epoch.Offset = {
+  UTC: {
+    _id: 'Z',
+    _totalSeconds: 0
+  }
+};
 Epoch.prototype.add = require('./methods/add');
 Epoch.prototype.endOf = require('./methods/endOf');
 Epoch.prototype.format = require('./methods/format');
