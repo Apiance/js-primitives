@@ -1,9 +1,5 @@
-let milliSecondsInTimeframe = {
-  's' : 1000,
-  'm' : 60000,
-  'h' : 3600000,
-  'd' : 86400000,
-};
+let milliSecondsInTimeframe = require('../utils/getTimeframeDurationInMilliseconds');
+const { longs, shorts } = require('../constants/months');
 module.exports = function add(unit, value) {
   switch (unit) {
     case "year":
@@ -17,19 +13,29 @@ module.exports = function add(unit, value) {
         this.set('month',(Number(curMon)+value) % 12);
       }else{
         this.set('month', Number(curMon)+value)
+        // FIXME
+        // in this case, sometimes day is not valid
+        if(shorts.includes(this.get('month'))){
+          if(this.get('day') > '30'){
+            this.set('day', '30')
+          }
+        }
       }
       return this;
+    case "week":
+      this.date = this.constructor.fromNumber(this.to('ms') + value * milliSecondsInTimeframe("W")).date
+      return this;
     case "day":
-      this.date = this.constructor.fromNumber(this.to('ms') + value * milliSecondsInTimeframe["d"]).date
+      this.date = this.constructor.fromNumber(this.to('ms') + value * milliSecondsInTimeframe("d")).date
       return this;
     case "hour":
-      this.date = this.constructor.fromNumber(this.to('ms') + value * milliSecondsInTimeframe["h"]).date;
+      this.date = this.constructor.fromNumber(this.to('ms') + value * milliSecondsInTimeframe("h")).date;
       return this;
     case "minute":
-      this.date =  this.constructor.fromNumber(this.to('ms') + value * milliSecondsInTimeframe["m"]).date;
+      this.date =  this.constructor.fromNumber(this.to('ms') + value * milliSecondsInTimeframe("m")).date;
       return this;
     case "second":
-      this.date =  this.constructor.fromNumber(this.to('ms') + value * milliSecondsInTimeframe["s"]).date;
+      this.date =  this.constructor.fromNumber(this.to('ms') + value * milliSecondsInTimeframe("s")).date;
       return this;
     default:
       throw new Error(`Not handled unit ${unit}`);

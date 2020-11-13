@@ -17,10 +17,12 @@ module.exports = function considerNewLastPrice(lastPrice, amount = null){
   this.close = lastPrice;
   if(isString(amount)) amount = Number(amount);
   if(isNum(amount)){
-    if(this.volume===null){
-      this.volume=0;
-    }
-    this.volume = new Big(this.volume).plus(amount).toString();
+    if(this.volume===null) this.volume={ base: 0, quote: 0 };
+    if(this.volume.base===null) this.volume.base= 0;
+    if(this.volume.quote===null) this.volume.quote= 0;
+
+    this.volume.base = new Big(this.volume.base).plus(amount).toString();
+    this.volume.quote = new Big(this.volume.quote).plus(amount*lastPrice).toString();
   }else {
     // throw new MissingParameterError('amount', {lastPrice, amount});
   }

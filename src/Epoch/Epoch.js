@@ -9,6 +9,9 @@ class Epoch {
     }
     this.date = (props && props.date) ? props.date : Epoch.toISOString();
   }
+  clone(){
+    return new Epoch({date: this.date});
+  }
 };
 
 Epoch.fromNumber = function fromNumber(numberParam) {
@@ -40,6 +43,7 @@ Epoch.Offset = {
     _totalSeconds: 0
   }
 };
+
 Epoch.prototype.add = require('./methods/add');
 Epoch.prototype.endOf = require('./methods/endOf');
 Epoch.prototype.format = require('./methods/format');

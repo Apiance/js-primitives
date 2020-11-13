@@ -44,8 +44,6 @@ describe('Trade', function suite(){
   });
   it('should work with multiple timestamp format', function () {
     const trade = new Trade(data);
-    console.log(trade);
     const trade2 = new Trade(data2);
-    console.log(trade2);
   });
 });

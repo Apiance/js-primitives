@@ -1,6 +1,10 @@
 class Asset {
   constructor(props = {}) {
-    Object.assign(this, props);
+    const { name, isoCode, ...otherProps } = props;
+    this.name = (name) ? name : null;
+    // ISO 4217 of currency
+    this.isoCode = (isoCode) ? isoCode.toUpperCase() : null;
+    Object.assign(this, otherProps);
   }
 };
 module.exports = Asset;

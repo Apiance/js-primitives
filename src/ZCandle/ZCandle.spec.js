@@ -3,8 +3,13 @@ const ZCandle = require('./ZCandle');
 const Candle = require('../Candle/Candle');
 
 describe('ZCandle', function suite(){
-  const zippedCandleStr = 'C::KRAKEN::BTCUSD::1d::2020-08-02T00:00:00.000Z::10000::10111::10000::10100::42';
-  const candle = new Candle({
+  const zippedCandleStr1 = 'C::KRAKEN::BTCUSD::1d::2020-08-02T00:00:00.000Z::10000::10111::10000::10100';
+  const zippedCandleStr2 = 'C::KRAKEN::BTCUSD::1d::2020-08-02T00:00:00.000Z::10000::10111::10000::10100::42';
+  const zippedCandleStr3 = 'C::KRAKEN::BTCUSD::1d::2020-08-02T00:00:00.000Z::10000::10111::10000::10100::-151500::42';
+  const zippedCandleStr4 = 'C::KRAKEN::BTCUSD::1d::2020-08-02T00:00:00.000Z::10000::10111::10000::10100::15-151500::42';
+  const zippedCandleStr5 = 'C::KRAKEN::BTCUSD::1d::2020-08-02T00:00:00.000Z::10000::10111::10000::10100::15-::42';
+  const zippedCandleStr6 = 'C::KRAKEN::BTCUSD::1d::2020-08-02T00:00:00.000Z::10000::10111::10000::10100::15-';
+  const opts = {
     exchange: 'KRAKEN',
     symbol: 'BTCUSD',
     interval: '1d',
@@ -13,40 +18,78 @@ describe('ZCandle', function suite(){
     high:'10111',
     low: '10000',
     close: '10100',
-    volume: '42',
-  });
+  };
+  const candle1 = new Candle(opts);
+  const candle2 = new Candle({...opts, trades: "42"});
+  const candle3 = new Candle({...opts, trades: "42", volume: {quote: "151500"}});
+  const candle4 = new Candle({...opts, trades: "42", volume: {quote: "151500", base: "15"}});
+  const candle5 = new Candle({...opts, trades: "42", volume: { base: "15"}});
+  const candle6 = new Candle({...opts, volume: { base: "15"}});
   it('should instantiates', ()=>{
-    // zcandle = new ZCandle();
-    // expect(zcandle).to.exist;
+    zcandle = new ZCandle();
+    expect(zcandle).to.exist;
   })
   it('should init from candle', function () {
-    const zcandle = new ZCandle(candle);
-    console.log(zcandle);
-    expect(zcandle.toString()).to.equal(zippedCandleStr);
+    const zcandle1 = new ZCandle(candle1);
+    expect(zcandle1.toString()).to.equal(zippedCandleStr1);
+    const zcandle2 = new ZCandle(candle2);
+    expect(zcandle2.toString()).to.equal(zippedCandleStr2);
+    const zcandle3 = new ZCandle(candle3);
+    expect(zcandle3.toString()).to.equal(zippedCandleStr3);
+    const zcandle4 = new ZCandle(candle4);
+    expect(zcandle4.toString()).to.equal(zippedCandleStr4);
+    const zcandle5 = new ZCandle(candle5);
+    expect(zcandle5.toString()).to.equal(zippedCandleStr5);
+    const zcandle6 = new ZCandle(candle6);
+    expect(zcandle6.toString()).to.equal(zippedCandleStr6);
   });
-  return;
   it('should init from zipped', function () {
-    const zcandle = new ZCandle(zippedCandleStr);
-    expect(zcandle.toString()).to.equal(zippedCandleStr);
+    const zcandle1 = new ZCandle(zippedCandleStr1);
+    expect(zcandle1.toString()).to.equal(zippedCandleStr1);
+
+    const zcandle2 = new ZCandle(zippedCandleStr2);
+    expect(zcandle2.toString()).to.equal(zippedCandleStr2);
+
+    const zcandle3 = new ZCandle(zippedCandleStr3);
+    expect(zcandle3.toString()).to.equal(zippedCandleStr3);
+
+    const zcandle4 = new ZCandle(zippedCandleStr4);
+    expect(zcandle4.toString()).to.equal(zippedCandleStr4);
+
+    const zcandle5 = new ZCandle(zippedCandleStr5);
+    expect(zcandle5.toString()).to.equal(zippedCandleStr5);
+
+    const zcandle6 = new ZCandle(zippedCandleStr6);
+    expect(zcandle6.toString()).to.equal(zippedCandleStr6);
   });
-  it('should convert to trade', function () {
-    const zcandle = new ZCandle(zippedCandleStr);
-    expect(zcandle.toCandle()).to.deep.equal(candle);
+  it('should convert to candle', function () {
+    const zcandle1 = new ZCandle(zippedCandleStr1);
+    expect(zcandle1.toCandle()).to.deep.equal(candle1);
+
+    const zcandle2 = new ZCandle(zippedCandleStr2);
+    expect(zcandle2.toCandle()).to.deep.equal(candle2);
+
+    const zcandle3 = new ZCandle(zippedCandleStr3);
+    expect(zcandle3.toCandle()).to.deep.equal(candle3);
+
+    const zcandle4 = new ZCandle(zippedCandleStr4);
+    expect(zcandle4.toCandle()).to.deep.equal(candle4);
+
+    const zcandle5 = new ZCandle(zippedCandleStr5);
+    expect(zcandle5.toCandle()).to.deep.equal(candle5);
+
+    const zcandle6 = new ZCandle(zippedCandleStr6);
+    expect(zcandle6.toCandle()).to.deep.equal(candle6);
   });
   it('should create from candle', function () {
-    const zcandle = new ZCandle(zippedCandleStr);
+    const zcandle = new ZCandle(zippedCandleStr1);
     const candle = zcandle.toCandle();
 
     expect(new ZCandle(candle)).to.deep.equal(zcandle);
-    console.log(zcandle);
   });
   it('should clone', function () {
-    const zcandle = new ZCandle(zippedCandleStr);
+    const zcandle = new ZCandle(zippedCandleStr1);
     const zcandle1 = new ZCandle(zcandle);
-  });
-  it('should from full zipped', function () {
-    const fullZippedStr = `C::KRAKEN::BTCUSD::1d::2020-08-02T00:00:00.000Z::10000::10111::10000::10100::42::60`;
-    console.log(new Candle(fullZippedStr));
-    console.log(new Candle(fullZippedStr));
+    expect(zcandle1.clone()).to.deep.equal(zcandle);
   });
 });

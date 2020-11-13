@@ -1,4 +1,4 @@
-const logger = require('../../logger')();
+const logger = require('../../createLogger')();
 const Keys = require('../../Keys/Keys');
 module.exports = function addKeys(keys){
 

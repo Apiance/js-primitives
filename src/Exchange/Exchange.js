@@ -1,6 +1,8 @@
 class Exchange {
   constructor(props = {}) {
-    this.name = props.name || 'UnnamedExchange';
+    const { name, ...otherProps } = props;
+    this.name = (name) ? name : 'UnnamedExchange';
+    Object.assign(this, otherProps);
   }
   toString(){
     return this.name.toString();

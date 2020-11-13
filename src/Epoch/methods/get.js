@@ -16,7 +16,8 @@ module.exports = function get(unit) {
       return this.date.split('T')[0];
     case "time":
       return this.date.split('T')[1];
-
+    case "dayOfWeek":
+      return new Date(this.date).getDay();
     case "year":
       return this.date.split('-')[0];
     case "month":

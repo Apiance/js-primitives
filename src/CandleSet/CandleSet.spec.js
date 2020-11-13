@@ -44,15 +44,12 @@ describe('Candle', function suite(){
   })
   it('should instantiate from array', function () {
     const candleSetFromArray = new CandleSet([]);
-    console.log({candleSetFromArray});
   });
   it('should insert candle', function () {
     candleSet = new CandleSet();
     candleSet.insert(new Candle(opts1));
     candleSet.insert(new Candle(opts2));
     candleSet.insert(new Candle(opts3));
-    console.log(candleSet.candles)
-
   });
 
 });

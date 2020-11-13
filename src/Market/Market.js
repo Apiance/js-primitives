@@ -26,25 +26,32 @@ class Market {
     this.exchange = (props.exchange) ? props.exchange.toString().toUpperCase() : null;
     this.type = (props.type) ? props.type.toString().toUpperCase() : null;
     this.symbol = (props.symbol) ? props.symbol.toString().toUpperCase() : null;
-    this.quote = (props.quote) ? props.quote.toString().toUpperCase() : null;
-    this.base = (props.base) ? props.base.toString().toUpperCase() : null;
+
+    this.quote = null;
+    this.base = null;
+
+    if(props.quote || props.base){
+      let { quote, base } = props;
+      this.base = (base) ? base : (props.symbol.split(quote)[0].toString().toUpperCase())
+      this.quote = (quote) ? quote : (props.symbol.split(base)[1].toString().toUpperCase())
+    }
   }
   toObject(){
-    return this;
+    const { exchange, type, symbol, quote, base } = this;
+    const obj = {
+      exchange, type, symbol, quote, base
+    };
+    return obj;
   }
   toJSON(){
-    return this.toString();
+    return this.toObject();
   }
   toString(){
-    if(this.symbol && !this.type){
-      return `${this.exchange.toString()}::${this.symbol}`;
-    }else{
-      let marketId = `${this.quote}-${this.base}`;
-      if(this.type){
-        marketId = `${this.type}-${marketId}`;
-      }
-      return `${this.exchange.toString()}::${marketId}`;
-    }
+    let marketId = (this.base && this.quote) ? `${this.base}-${this.quote}` : this.symbol;
+    return (this.type) ? `${this.exchange.toString()}::${this.type}-${marketId}` : `${this.exchange.toString()}::${marketId}`;
+  }
+  toCompressed(){
+    return this.toString();
   }
 };
 module.exports = Market;

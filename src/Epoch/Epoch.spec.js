@@ -54,7 +54,7 @@ describe('Epoch', function suite(){
     expect(secEpo.toTimestamp('ns')).to.equal(1596322800000000000);
 
     const timestampAsStr = new Epoch('1596417191996');
-    console.log(timestampAsStr);
+    expect(timestampAsStr.date).to.equal('2020-08-03T01:13:11.996Z');
   });
   it('should get format', function () {
     const epoch = new Epoch('2020-08-02T00:33:58.000Z')
@@ -68,18 +68,47 @@ describe('Epoch', function suite(){
     expect(epoch.format('mm')).to.equal('33');
     expect(epoch.format('ss')).to.equal('58');
   });
+  it('should get day of week', function () {
+    const e2 = new Epoch('2020-11-13T02:28:26.865Z');
+    expect(e2.get('dayOfWeek')).to.equal(5)
+  });
   it('should get to start of unit', function () {
     const e1 = new Epoch('2020-08-02T00:33:58.130Z')
     expect(e1.startOf('minute').date).to.equal('2020-08-02T00:33:00.000Z');
+
+
+  });
+  it('should set startOf week', function () {
+    const e2 = new Epoch('2020-11-13T02:28:26.865Z');
+    expect(e2.startOf('week').date).to.equal('2020-11-09T00:00:00.000Z')
+    // sunday
+    expect(e2.startOf('week', {firstDay: 0}).date).to.equal( '2020-11-08T00:00:00.000Z')
+    // monday
+    expect(e2.startOf('week', {firstDay: 1}).date).to.equal('2020-11-09T00:00:00.000Z')
   });
   it('should get to end of unit', function () {
     const e1 = new Epoch('2020-08-02T00:33:58.130Z')
     expect(e1.endOf('minute').date).to.equal('2020-08-02T00:33:59.999Z');
   });
-  it('should add minutes', function () {
+  it('should add unit', function () {
     const e1 = new Epoch('2020-08-02T00:33:58.130Z')
     expect(e1.add('day',1).date).to.equal('2020-08-03T00:33:58.130Z');
     expect(e1.add('hour',1).date).to.equal('2020-08-03T01:33:58.130Z');
-    // expect(e1.add('minute',1).date).to.equal('2020-08-03T01:34:58.130Z');
+    expect(e1.add('minute',1).date).to.equal('2020-08-03T01:34:58.130Z');
+    expect(e1.add('day',28).date).to.equal('2020-08-31T01:34:58.130Z');
+    expect(e1.add('month',1).date).to.equal('2020-09-30T01:34:58.130Z');
+    expect(e1.add('month',1).date).to.equal('2020-10-30T01:34:58.130Z');
+    expect(e1.add('year',1).date).to.equal('2021-10-30T01:34:58.130Z');
+    expect(e1.add('week',1).date).to.equal('2021-11-06T01:34:58.130Z');
+  });
+  it('should substract unit', function () {
+    const e1 = new Epoch('2020-08-02T00:33:58.130Z')
+    expect(e1.subtract('day',1).date).to.equal('2020-08-01T00:33:58.130Z');
+    expect(e1.subtract('hour',1).date).to.equal('2020-07-31T23:33:58.130Z');
+    expect(e1.subtract('minute',1).date).to.equal('2020-07-31T23:32:58.130Z');
+    expect(e1.subtract('month',1).date).to.equal('2020-06-30T23:32:58.130Z');
+    expect(e1.subtract('month',1).date).to.equal('2020-05-30T23:32:58.130Z');
+    expect(e1.subtract('year',1).date).to.equal('2019-05-30T23:32:58.130Z');
+    expect(e1.subtract('week',1).date).to.equal('2019-05-23T23:32:58.130Z');
   });
 });

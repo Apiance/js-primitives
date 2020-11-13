@@ -1,4 +1,4 @@
-module.exports = function endOf(unit) {
+module.exports = function endOf(unit, opts = {}) {
   switch (unit) {
     case "year":
       this.set('day', '31');
@@ -17,6 +17,16 @@ module.exports = function endOf(unit) {
           this.set('day', '30');
         }
       }
+      this.set('time', '23:59:59.999');
+      return this;
+    case "week":
+      const dayOfWeek = this.get('dayOfWeek');
+      // default first day of week is monday for markets.
+      const firstDay = (opts && opts.firstDay !== undefined) ? opts.firstDay : 1;
+      const currentDay = this.get('day');
+      let lastDay = (opts.lastDay) ? opts.lastDay + 1 : 7 + firstDay;
+        const numberOfDaysToAdd = (lastDay - dayOfWeek) - 1;
+      this.set('day', parseInt(currentDay) + numberOfDaysToAdd);
       this.set('time', '23:59:59.999');
       return this;
     case "day":

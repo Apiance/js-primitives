@@ -19,9 +19,11 @@ class ZCandle {
   toString(){
     return this.c.toString();
   }
+  clone(){
+    return new ZCandle(this);
+  }
 }
 ZCandle.fromString = function(str) {
-  console.log({str});
   if(!str.slice(0,3) === 'C::'){
     throw new Error('Unrecognized pattern');
   }
@@ -35,11 +37,15 @@ ZCandle.fromCandle = function(candle) {
 }
 ZCandle.fromObject = function(object) {
   let z = `C::${object.market}::${object.interval}::${object.openTime}::${object.open}::${object.high}::${object.low}::${object.close}`;
-  if(object.quoteVolume){
-    z += `::${object.quoteVolume}`;
-    if(object.trades) {
-      z += `::${object.trades}`;
-    }
+  if(object.volume){
+    const { base, quote } = volume;
+    z+= `::`;
+    if(base) z+= `${base}`;
+    z+= `-`;
+    if(quote) z+= `${quote}`;
+  }
+  if(object.trades) {
+    z += `::${object.trades}`;
   }
   return new ZCandle(z)
 }

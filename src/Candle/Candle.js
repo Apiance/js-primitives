@@ -12,6 +12,7 @@ const defaultOpts = {
   low: null,
   high: null,
   volume: null,
+  trades: null,
   timestamp: null,
 };
 const fromZCandle = (opts) => {
@@ -73,7 +74,8 @@ class Candle {
 
     if(!this.closeTime) this.closeTime = calculateCloseTime(this);
 
-    if(opts.trades) this.trades = opts.trades;
+
+    this.trades = _.get(opts, 'trades', defaultOpts.trades);
   }
 };
 Candle.prototype.considerNewLastPrice = require('./methods/considerNewLastPrice');

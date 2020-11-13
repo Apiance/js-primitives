@@ -17,13 +17,13 @@ module.exports = function set(unit, value) {
       this.date = `${splittedDate[0]}-${stringifiedValue.padStart(2, '0')}-${splittedDate[2]}`;
       return this;
     case "day":
-      this.date = `${splittedDate[0]}-${splittedDate[1]}-${stringifiedValue}${this.date.slice(timeSplitIndex)}`;
+      this.date = `${splittedDate[0]}-${splittedDate[1]}-${stringifiedValue.padStart(2,'0')}${this.date.slice(timeSplitIndex)}`;
       return this;
     case "hour":
-      this.date = `${splittedTime[0].slice(0, -2)}${stringifiedValue}:${splittedTime[1]}:${splittedTime[2]}`;
+      this.date = `${splittedTime[0].slice(0, -2)}${stringifiedValue.padStart(2,'0')}:${splittedTime[1]}:${splittedTime[2]}`;
       return this;
     case "minute":
-      this.date = `${splittedTime[0]}:${stringifiedValue}:${splittedTime[2]}`;
+      this.date = `${splittedTime[0]}:${stringifiedValue.padStart(2,'0')}:${splittedTime[2]}`;
       return this;
     case "second":
       const milli = this.get('millisecond');

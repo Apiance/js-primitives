@@ -6,8 +6,7 @@ describe('ZTrade', function suite(){
   const zippedTradeStr = 'Z::BINANCE::DASHUSD::2020-08-02T00:37:56.142Z::00001::10000::4::1::b001::s001';
   const zippedTradeStr2 = 'Z::BINANCE::ETHBTC::1596417191996::185404189::0.03425800::3.32600000::BUY::837536680::837536822';
   const trade = new Trade({
-    symbol: 'DASHUSD',
-    exchange: 'BINANCE',
+    market: 'BINANCE::DASHUSD',
     rate: '10000',
     quantity: '4',
     timestamp: '2020-08-02T00:37:56.142Z',
@@ -38,6 +37,5 @@ describe('ZTrade', function suite(){
   });
   it('should work with different format', function () {
     const ztrade = new ZTrade(zippedTradeStr2);
-    console.log(ztrade.toTrade());
   });
 });
