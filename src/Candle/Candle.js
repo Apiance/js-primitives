@@ -1,4 +1,4 @@
-const _ = require('lodash');
+const get = require('lodash.get');
 const Epoch = require('../Epoch/Epoch');
 const Exchange = require('../Exchange/Exchange');
 const Market = require('../Market/Market');
@@ -47,15 +47,15 @@ class Candle {
       base: opts.base || null
     });
 
-    this.interval = _.get(opts, 'interval', defaultOpts.interval);
+    this.interval = get(opts, 'interval', defaultOpts.interval);
 
-    this.open = _.get(opts, 'open', defaultOpts.open);
-    this.close = _.get(opts, 'close', defaultOpts.close);
-    this.low = _.get(opts, 'low', defaultOpts.low);
-    this.high = _.get(opts, 'high', defaultOpts.high);
+    this.open = get(opts, 'open', defaultOpts.open);
+    this.close = get(opts, 'close', defaultOpts.close);
+    this.low = get(opts, 'low', defaultOpts.low);
+    this.high = get(opts, 'high', defaultOpts.high);
 
     // Volume is always expressed in quoteVolume (like other price value are)
-    this.volume = _.get(opts, 'volume', defaultOpts.volume);
+    this.volume = get(opts, 'volume', defaultOpts.volume);
 
     let openTime = opts.openTime;
     if(opts.timestamp) openTime = opts.timestamp;
@@ -75,7 +75,7 @@ class Candle {
     if(!this.closeTime) this.closeTime = calculateCloseTime(this);
 
 
-    this.trades = _.get(opts, 'trades', defaultOpts.trades);
+    this.trades = get(opts, 'trades', defaultOpts.trades);
   }
 };
 Candle.prototype.considerNewLastPrice = require('./methods/considerNewLastPrice');
