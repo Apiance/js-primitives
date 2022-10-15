@@ -10,7 +10,7 @@ const isString = require('../utils/isString')
  * @return {Boolean}
  */
 
-module.exports = function considerNewLastPrice(lastPrice, amount = null){
+module.exports = function considerNewLastPrice(lastPrice, amount = null, tradesQty = 0){
   if(!lastPrice){
     throw new MissingParameterError('lastPrice', {lastPrice, amount});
   }
@@ -31,6 +31,9 @@ module.exports = function considerNewLastPrice(lastPrice, amount = null){
 
   if(lastPrice>this.high || this.high === null) this.high = lastPrice;
   if(lastPrice<this.low || this.low === null) this.low = lastPrice;
+
+  if(this.trades === null) this.trades = 0;
+  this.trades += tradesQty;
 
   return true;
 }
