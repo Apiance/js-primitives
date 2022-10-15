@@ -1,8 +1,8 @@
 module.exports = function toJSON(){
-  const { symbol, exchange, id, rate, quantity, side, buyOrderId, sellOrderId, timestamp } = this;
+  const { id, rate, quantity, side, buyOrderId, sellOrderId, timestamp } = this;
+  const market = this.market.toJSON();
   return {
-    symbol,
-    exchange,
+    market,
     id,
     rate,
     quantity,
