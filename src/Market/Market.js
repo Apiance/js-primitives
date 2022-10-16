@@ -1,9 +1,10 @@
+const TYPES = require('./TYPES');
 const fromString = (value) =>{
   const [exchange, market] = value.split('::');
   const splitted = market.split('-');
   if(splitted.length>1){
     if(exchange === 'FTX' && splitted[1] === 'PERP'){
-      return new Market({exchange, symbol: market});
+      return new Market({exchange, symbol: market, type: TYPES.PERP, quote: 'USD', base: splitted[0]});
     }
     const [quote, base, type] = splitted.reverse();
     return new Market({exchange, type, quote, base});

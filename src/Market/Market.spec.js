@@ -94,4 +94,13 @@ describe('Market', function suite() {
     expect(market4.toCompressed()).to.equal('BINANCE::PERP-DASH-BTC')
     expect(market5.toCompressed()).to.equal('BINANCE::PERP-DASH-BTC')
   });
+  it('should hold specific cases', function () {
+    expect(new Market('FTX::BTC-PERP').toJSON()).to.deep.equal({
+      "base": "BTC",
+      "exchange": "FTX",
+      "quote": "USD",
+      "symbol": "BTC-PERP",
+      "type": 'PERP'
+    })
+  });
 });
