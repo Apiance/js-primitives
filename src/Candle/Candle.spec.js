@@ -163,4 +163,24 @@ describe('Candle', function suite(){
     expect(c.volume.quote).to.equal('84.1717')
     expect(c.trades).to.equal('4')
   });
+  it('should toJSON', function(){
+    const c = new Candle('C::FTX::BTC-PERP::10s::2022-10-15T18:27:00.000Z::19130::19130::19129::19130::0.0044-84.1717::4');
+    const json = c.toJSON();
+    expect(json.market).to.deep.equal({
+      exchange: 'FTX',
+      type: "PERP",
+      symbol: 'BTC-PERP',
+      base: "BTC",
+      quote: "USD",
+    });
+    expect(json.interval).to.deep.equal('10s');
+    expect(json.open).to.deep.equal('19130');
+    expect(json.close).to.deep.equal('19130');
+    expect(json.low).to.deep.equal('19129');
+    expect(json.high).to.deep.equal('19130');
+    expect(json.volume).to.deep.equal({ base:'0.0044', quote: '84.1717' });
+    expect(json.openTime).to.deep.equal({ date: '2022-10-15T18:27:00.000Z' });
+    expect(json.closeTime).to.deep.equal({ date: '2022-10-15T18:27:09.999Z' });
+    expect(json.trades).to.deep.equal('4');
+  });
 });

@@ -83,5 +83,6 @@ Candle.prototype.considerNewLastPrice = require('./methods/considerNewLastPrice'
 Candle.prototype.isWithinInterval = require('./methods/isWithinInterval');
 Candle.prototype.toCompressed = require('./methods/toCompressed');
 Candle.prototype.toZCandle = require('./methods/toZCandle');
+Candle.prototype.toJSON = require('./methods/toJSON');
 Candle.prototype.getId = require('./methods/getId');
 module.exports = Candle;
