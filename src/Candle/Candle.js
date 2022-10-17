@@ -11,7 +11,7 @@ const defaultOpts = {
   close: null,
   low: null,
   high: null,
-  volume: null,
+  volume: { base: null, quote: null },
   trades: null,
   timestamp: null,
 };
@@ -49,13 +49,15 @@ class Candle {
 
     this.interval = get(opts, 'interval', defaultOpts.interval);
 
-    this.open = get(opts, 'open', defaultOpts.open);
-    this.close = get(opts, 'close', defaultOpts.close);
-    this.low = get(opts, 'low', defaultOpts.low);
-    this.high = get(opts, 'high', defaultOpts.high);
+    this.open = get(opts, 'open', defaultOpts.open)?.toString();
+    this.close = get(opts, 'close', defaultOpts.close)?.toString();
+    this.low = get(opts, 'low', defaultOpts.low)?.toString();
+    this.high = get(opts, 'high', defaultOpts.high)?.toString();
 
-    // Volume is always expressed in quoteVolume (like other price value are)
-    this.volume = get(opts, 'volume', defaultOpts.volume);
+    this.volume = {
+      base: (opts?.volume?.base) ? get(opts.volume, 'base').toString() : defaultOpts.volume.base,
+      quote: (opts?.volume?.quote) ? get(opts.volume, 'quote').toString() : defaultOpts.volume.quote,
+    };
 
     let openTime = opts.openTime;
     if(opts.timestamp) openTime = opts.timestamp;
@@ -74,8 +76,7 @@ class Candle {
 
     if(!this.closeTime) this.closeTime = calculateCloseTime(this);
 
-
-    this.trades = get(opts, 'trades', defaultOpts.trades);
+    this.trades = (opts?.trades) ? get(opts, 'trades').toString() : defaultOpts.trades;
   }
 };
 Candle.prototype.considerNewLastPrice = require('./methods/considerNewLastPrice');

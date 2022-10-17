@@ -40,7 +40,7 @@ describe('Candle', function suite(){
     expect(candle.high).to.equal('10111');
     expect(candle.low).to.equal('10000');
     expect(candle.interval).to.equal('1d');
-    expect(candle.volume).to.deep.equal(null);
+    expect(candle.volume).to.deep.equal({base: null, quote: null});
     expect(candle.trades).to.deep.equal(null);
     expect(candle.openTime).to.deep.equal(new Epoch('2020-08-02T00:00:00.000Z'));
     expect(candle.closeTime).to.deep.equal(new Epoch('2020-08-02T23:59:59.999Z'));
@@ -138,5 +138,29 @@ describe('Candle', function suite(){
     expect(new Candle({...opts, trades: 42, volume: {quote:42, base: 31}}).toCompressed()).to.equal('C::KRAKEN::BTCUSD::1d::2020-08-02T00:00:00.000Z::10000::10111::10000::10100::31-42::42');
     expect(new Candle({...opts, trades: 42, volume: {base: 31}}).toCompressed()).to.equal('C::KRAKEN::BTCUSD::1d::2020-08-02T00:00:00.000Z::10000::10111::10000::10100::31-::42');
     expect(new Candle({...opts, trades: 42, volume: {quote:42}}).toCompressed()).to.equal('C::KRAKEN::BTCUSD::1d::2020-08-02T00:00:00.000Z::10000::10111::10000::10100::-42::42');
+  });
+  it('should correctly translate to string numerical value', function () {
+    const c = new Candle({
+      market: {
+          exchange: 'FTX',
+          symbol: 'BTC-PERP',
+      },
+        interval: '10s',
+        open: 19130,
+        close: 19130,
+        low: 19129,
+        high: 19130,
+        volume: { base: 0.0044, quote: 84.1717 },
+        openTime: { date: '2022-10-15T18:27:00.000Z' },
+        closeTime:  { date: '2022-10-15T18:27:09.999Z' },
+        trades: 4
+    });
+    expect(c.open).to.equal('19130')
+    expect(c.close).to.equal('19130')
+    expect(c.low).to.equal('19129')
+    expect(c.high).to.equal('19130')
+    expect(c.volume.base).to.equal('0.0044')
+    expect(c.volume.quote).to.equal('84.1717')
+    expect(c.trades).to.equal('4')
   });
 });
