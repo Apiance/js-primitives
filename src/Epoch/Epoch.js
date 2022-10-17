@@ -54,5 +54,6 @@ Epoch.prototype.startOf = require('./methods/startOf');
 Epoch.prototype.subtract = require('./methods/subtract');
 Epoch.prototype.to = require('./methods/to');
 Epoch.prototype.toString = require('./methods/toString');
+Epoch.prototype.toJSON = require('./methods/toJSON');
 Epoch.prototype.toTimestamp = require('./methods/toTimestamp');
 module.exports = Epoch;
