@@ -1,5 +1,8 @@
 ## Primitives
 
+> This repository holds all the primitives needed to help with the data format used by the Apiance API.  
+> 
+
 ### Asset 
 `const { Asset } = require('@apiance/js-primitives')`
 

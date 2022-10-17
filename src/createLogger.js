@@ -1,12 +1,16 @@
 const pino = require('pino');
 
-module.exports = (filename) => {
-  return pino({
-    prettyPrint: {
-      colorize: true,
-      translateTime: "yyyy-mm-dd HH:MM:ss"
-    },
-    base: '',
-    level: 'trace'
-  });
+module.exports = (props = {}) => {
+    return pino({
+        transport: {
+            target: 'pino-pretty',
+            options: {
+                colorize: true,
+                translateTime: "yyyy-mm-dd HH:MM:ss",
+                messageFormat: (props?.prefix) ? `${props.prefix} {msg}` : `{msg}`
+            }
+        },
+        base: '',
+        level: 'trace'
+    });
 };
