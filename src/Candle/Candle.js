@@ -47,12 +47,12 @@ class Candle {
       base: opts.base || null
     });
 
-    this.interval = get(opts, 'interval', defaultOpts.interval);
+    this.interval = (opts?.interval) ? get(opts, 'interval').toString() : defaultOpts.interval,
 
-    this.open = get(opts, 'open', defaultOpts.open)?.toString();
-    this.close = get(opts, 'close', defaultOpts.close)?.toString();
-    this.low = get(opts, 'low', defaultOpts.low)?.toString();
-    this.high = get(opts, 'high', defaultOpts.high)?.toString();
+    this.open = (opts?.open) ? get(opts, 'open').toString() : defaultOpts.open,
+    this.close = (opts?.close) ? get(opts, 'close').toString() : defaultOpts.close,
+    this.low = (opts?.low) ? get(opts, 'low').toString() : defaultOpts.low,
+    this.high = (opts?.low) ? get(opts, 'high').toString() : defaultOpts.high,
 
     this.volume = {
       base: (opts?.volume?.base) ? get(opts.volume, 'base').toString() : defaultOpts.volume.base,

@@ -14,7 +14,7 @@ module.exports = function considerNewLastPrice(lastPrice, amount = null, tradesQ
   if(!lastPrice){
     throw new MissingParameterError('lastPrice', {lastPrice, amount});
   }
-  this.close = lastPrice;
+  this.close = lastPrice.toString();
   if(isString(amount)) amount = Number(amount);
   if(isNum(amount)){
     if(this.volume===null) this.volume={ base: 0, quote: 0 };
@@ -27,13 +27,15 @@ module.exports = function considerNewLastPrice(lastPrice, amount = null, tradesQ
     // throw new MissingParameterError('amount', {lastPrice, amount});
   }
 
-  if(this.open===null) this.open = lastPrice;
+  if(this.open===null) this.open = lastPrice.toString();
 
-  if(lastPrice>this.high || this.high === null) this.high = lastPrice;
-  if(lastPrice<this.low || this.low === null) this.low = lastPrice;
+  if(lastPrice>this.high || this.high === null) this.high = lastPrice.toString();
+  if(lastPrice<this.low || this.low === null) this.low = lastPrice.toString();
 
-  if(this.trades === null) this.trades = 0;
-  this.trades += tradesQty;
+  if(this.trades === null) this.trades = '0';
+  if(tradesQty !== null){
+    this.trades = new Big(this.trades).plus(tradesQty).toString();
+  }
 
   return true;
 }

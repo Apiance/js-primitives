@@ -95,16 +95,18 @@ describe('Candle', function suite(){
     expect(candle.isWithinInterval(new Epoch('2020-08-02T01:00:00.000Z'))).to.equal(true);
   });
   it('should update considerNewLastPrice', function () {
-    candle.considerNewLastPrice('10101', 15);
+    candle.considerNewLastPrice('10101', 15, 1);
     expect(candle.close).to.equal('10101')
     expect(candle.volume).to.deep.equal({quote: "151515", base: "15"})
+    expect(candle.trades).to.deep.equal('1')
     expect(()=>candle.considerNewLastPrice(null, 1)).to.throw('Missing parameter lastPrice. Supplied: {"lastPrice":null,"amount":1}');
-    candle.considerNewLastPrice(1, null);
-    expect(candle.close).to.equal(1);
+    candle.considerNewLastPrice(1, null, null);
+    expect(candle.close).to.equal('1');
     expect(candle.volume).to.deep.equal({ base: '15', quote: '151515' } )
+    expect(candle.trades).to.deep.equal('1')
+
   });
-  it('should toJSON', function () {
-  });
+
   it('should deal with trades', function () {
     const x = {
         market: "KRAKEN::P-BTC-USD",
@@ -182,5 +184,29 @@ describe('Candle', function suite(){
     expect(json.openTime).to.deep.equal({ date: '2022-10-15T18:27:00.000Z' });
     expect(json.closeTime).to.deep.equal({ date: '2022-10-15T18:27:09.999Z' });
     expect(json.trades).to.deep.equal('4');
+  });
+  it('should work', function () {
+    const c = new Candle({market: 'FTX::BTC-PERP', interval: '10s'});
+    c.considerNewLastPrice(19559, 0.34, 1);
+    c.considerNewLastPrice(19560, 0.10, 1);
+    c.considerNewLastPrice(19561, 0.45, 1);
+    c.considerNewLastPrice(19560, 0.25, 1);
+    c.considerNewLastPrice(19557, 0.25, 1);
+    c.considerNewLastPrice(19564, 0.15, 1);
+    c.considerNewLastPrice(19558, 1.42, 1);
+
+    expect(c.market.toString()).to.equal('FTX::BTC-PERP');
+    const json = c.toJSON();
+    expect(json.market).to.deep.equal({
+      exchange:'FTX',
+      type: "PERP",
+      base: "BTC",
+      quote: "USD",
+      symbol: 'BTC-PERP'
+    });
+    expect(json.open).to.equal('19559');
+    expect(json.close).to.equal('19558');
+    expect(json.low).to.equal('19557');
+    expect(json.high).to.equal('19564');
   });
 });
