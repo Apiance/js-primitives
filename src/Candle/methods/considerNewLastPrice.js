@@ -22,7 +22,7 @@ module.exports = function considerNewLastPrice(lastPrice, amount = null, tradesQ
     if(this.volume.quote===null) this.volume.quote= 0;
 
     this.volume.base = new Big(this.volume.base).plus(amount).toString();
-    this.volume.quote = new Big(this.volume.quote).plus(amount*lastPrice).toString();
+    this.volume.quote = new Big(this.volume.quote).plus(new Big(amount).times(lastPrice)).toString();
   }else {
     // throw new MissingParameterError('amount', {lastPrice, amount});
   }

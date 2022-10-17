@@ -208,5 +208,6 @@ describe('Candle', function suite(){
     expect(json.close).to.equal('19558');
     expect(json.low).to.equal('19557');
     expect(json.high).to.equal('19564');
+    expect(json.volume).to.deep.equal({ base: '2.96', quote: '57894.72' });
   });
 });
