@@ -1,8 +1,9 @@
 {
   "name": "@apiance/js-primitives",
-  "version": "2.2.0",
+  "version": "2.3.0",
   "description": "A set of commons primitives used in the Apiance stack.",
   "main": "index.js",
+  "private": false,
   "scripts": {
     "test": "mocha 'src/**/*.spec.js'"
   },

@@ -1,6 +1,6 @@
 module.exports = function toCompressed() {
-  const {market, interval, openTime, open, close, low, high, volume, trades} = this;
-  let compressed = `C::${market}::${interval}::${openTime}::${open}::${high}::${low}::${close}`;
+  const {market, interval, openTime, open, close, low, high, volume, trades, hash} = this;
+  let compressed = `C::${market}::${interval}::${openTime}::${hash}::${open}::${high}::${low}::${close}`;
 
   if (volume && (volume.quote || volume.base)) {
     const { base, quote } = volume;

@@ -9,6 +9,7 @@ function toJSON(){
         volume,
         openTime,
         closeTime,
+        hash,
         trades
     } = this;
     return {
@@ -20,6 +21,7 @@ function toJSON(){
         high,
         volume,
         openTime: openTime.toJSON(),
+        hash,
         closeTime: closeTime.toJSON(),
         trades
     }

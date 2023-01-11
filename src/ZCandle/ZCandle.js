@@ -36,7 +36,7 @@ ZCandle.fromCandle = function(candle) {
   return new ZCandle(candle.toCompressed())
 }
 ZCandle.fromObject = function(object) {
-  let z = `C::${object.market}::${object.interval}::${object.openTime}::${object.open}::${object.high}::${object.low}::${object.close}`;
+  let z = `C::${object.market}::${object.interval}::${object.openTime}::${object.hash}::${object.open}::${object.high}::${object.low}::${object.close}`;
   if(object.volume){
     const { base, quote } = volume;
     z+= `::`;

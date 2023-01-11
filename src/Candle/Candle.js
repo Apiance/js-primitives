@@ -3,6 +3,7 @@ const Epoch = require('../Epoch/Epoch');
 const Exchange = require('../Exchange/Exchange');
 const Market = require('../Market/Market');
 const calculateCloseTime = require('./utils/calculateCloseTime');
+const {h} = require("../Epoch/constants/timeframes");
 const defaultOpts = {
   exchange: null,
   symbol: null,
@@ -77,6 +78,18 @@ class Candle {
     if(!this.closeTime) this.closeTime = calculateCloseTime(this);
 
     this.trades = (opts?.trades) ? get(opts, 'trades').toString() : defaultOpts.trades;
+
+    this.hash = (opts?.hash) ? get(opts, 'hash') : 0;
+  }
+  considerTradeId(tradeId){
+    if(tradeId){
+      const hash = (Number(`0x${this.hash}`) + parseInt(tradeId)).toString(16);
+      console.log('hash',this.hash, Number(`0x${this.hash}`), {hash})
+      this.hash = hash
+    }
+  }
+  getHash(){
+    return this.hash;
   }
 };
 Candle.prototype.considerNewLastPrice = require('./methods/considerNewLastPrice');
