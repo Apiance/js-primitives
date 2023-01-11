@@ -1,11 +1,11 @@
 class Keys {
-  constructor(name, opts) {
-    if(opts){
-      if(opts.api) {
-        this.public = opts.api;
+  constructor(name, props) {
+    if(props){
+      if(props.api || props.public) {
+        this.public = props.public || props.api;
       }
-      if(opts.private || opts.secret){
-        this.private = opts.private || opts.secret;
+      if(props.private || props.secret){
+        this.private = props.private || props.secret;
       }
     }
     this.name = name;
