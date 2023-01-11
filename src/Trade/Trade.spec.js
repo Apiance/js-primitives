@@ -46,4 +46,17 @@ describe('Trade', function suite(){
     const trade = new Trade(data);
     const trade2 = new Trade(data2);
   });
+  it('should to ZTrade', function () {
+    const trade = new Trade({
+      market:{
+        symbol: 'BTCUSD',
+        exchange: 'KRAKEN',
+      },
+      rate: 10000,
+      quantity: 1,
+      timestamp: 1596300000
+    });
+    const ztrade = trade.toZTrade();
+    expect(ztrade.toString()).to.equal('Z::KRAKEN::BTCUSD::2020-08-01T16:40:00.000Z::null::10000::1::-1::null::null');
+  });
 });

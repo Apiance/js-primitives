@@ -1,5 +1,6 @@
 const Market = require('../Market/Market');
 const Epoch = require('../Epoch/Epoch');
+// const computeTradeId
 class Trade {
   /**
    *
@@ -9,7 +10,6 @@ class Trade {
   constructor(props = {}) {
     this.market = new Market(props.market);
 
-    this.id = props.id || null;
 
     this.rate = props.rate || null;
     this.quantity = props.quantity || null;
@@ -19,9 +19,11 @@ class Trade {
     this.sellOrderId = props.sellOrderId || null;
 
     this.timestamp = new Epoch(props.timestamp || null);
+    this.id = props.id || null
   }
 };
 Trade.prototype.toCompressed = require('./methods/toCompressed')
 Trade.prototype.toID = require('./methods/toID')
 Trade.prototype.toJSON = require('./methods/toJSON')
+Trade.prototype.toZTrade = require('./methods/toZTrade')
 module.exports = Trade;
