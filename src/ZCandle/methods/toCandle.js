@@ -1,4 +1,3 @@
-const {parse} = require("eslint-plugin-import/memo-parser");
 module.exports = function toCandle() {
   const Candle = require('../../Candle/Candle');
 
