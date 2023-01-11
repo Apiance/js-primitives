@@ -1,6 +1,6 @@
 const Market = require('../Market/Market');
 const Epoch = require('../Epoch/Epoch');
-// const computeTradeId
+const computeTradeId = require('./utils/computeTradeId.js');
 class Trade {
   /**
    *
@@ -19,7 +19,7 @@ class Trade {
     this.sellOrderId = props.sellOrderId || null;
 
     this.timestamp = new Epoch(props.timestamp || null);
-    this.id = props.id || null
+    this.id = props.id || computeTradeId(this)
   }
 };
 Trade.prototype.toCompressed = require('./methods/toCompressed')
