@@ -11,6 +11,6 @@ module.exports = (props = {}) => {
             }
         },
         base: '',
-        level: 'trace'
+        level: props?.level ?? 'trace'
     });
 };

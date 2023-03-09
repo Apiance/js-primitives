@@ -28,11 +28,19 @@
 // logger.info('x');
 // logger.fatal('x');
 
-const { Candle } = require('./index')
-const c = new Candle({
-    exchange:'Binance'
-});
-c.considerTradeId(185404189)
-c.considerTradeId(185404190)
+// const { Candle } = require('./index')
+// const c = new Candle({
+//     exchange:'Binance'
+// });
+// c.considerTradeId(185404189)
+// c.considerTradeId(185404190)
+//
+// console.log(c.toZCandle().toCandle());
 
-console.log(c.toZCandle().toCandle());
+
+const createLogger = require('./src/createLogger');
+
+const logger = createLogger({prefix: 'TEST', level: 'debug'})
+logger.info('y');
+logger.debug('x')
+logger.trace('x')
