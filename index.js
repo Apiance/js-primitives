@@ -16,6 +16,7 @@ module.exports = {
   Persona: require('./src/Persona/Persona'),
   SocketMessage: require('./src/SocketMessage/SocketMessage'),
   Ticker: require('./src/Ticker/Ticker'),
+  Tick: require('./src/Tick/Tick'),
   Trade: require('./src/Trade/Trade'),
   ZCandle: require('./src/ZCandle/ZCandle'),
   ZTrade: require('./src/ZTrade/ZTrade'),
