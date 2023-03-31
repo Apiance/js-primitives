@@ -80,7 +80,7 @@ class Candle {
 
     this.trades = (opts?.trades) ? get(opts, 'trades').toString() : defaultOpts.trades;
 
-    this.id = props.id || computeCandleId(this)
+    this.id = (opts?.id) ? get(opts, 'id').toString() : computeCandleId(this);
 
     this.tradesIds = [];
   }
