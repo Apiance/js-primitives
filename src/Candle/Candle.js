@@ -4,6 +4,7 @@ const Exchange = require('../Exchange/Exchange');
 const Market = require('../Market/Market');
 const calculateCloseTime = require('./utils/calculateCloseTime');
 const {h} = require("../Epoch/constants/timeframes");
+const computeCandleId = require("./utils/computeCandleId");
 const defaultOpts = {
   exchange: null,
   symbol: null,
@@ -79,7 +80,7 @@ class Candle {
 
     this.trades = (opts?.trades) ? get(opts, 'trades').toString() : defaultOpts.trades;
 
-    this.hash = (opts?.hash) ? get(opts, 'hash') : 0;
+    this.id = props.id || computeCandleId(this)
 
     this.tradesIds = [];
   }
