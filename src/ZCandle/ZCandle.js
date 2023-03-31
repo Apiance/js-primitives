@@ -44,7 +44,7 @@ ZCandle.fromObject = function(object) {
     z+= `-`;
     if(quote) z+= `${quote}`;
   }
-  if(object.trades) {
+  if(object.trades !== undefined) {
     z += `::${object.trades}`;
   }
   return new ZCandle(z)
