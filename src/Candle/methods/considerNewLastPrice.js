@@ -32,9 +32,8 @@ module.exports = function considerNewLastPrice(lastPrice, amount = null, tradesQ
   if(lastPrice>this.high || this.high === null) this.high = lastPrice.toString();
   if(lastPrice<this.low || this.low === null) this.low = lastPrice.toString();
 
-  if(this.trades === null) this.trades = '0';
   if(tradesQty !== null){
-    this.trades = new Big(this.trades).plus(tradesQty).toString();
+    this.trades = this.trades + parseInt(tradesQty);
   }
 
   return true;

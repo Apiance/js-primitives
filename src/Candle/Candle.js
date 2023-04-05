@@ -12,7 +12,7 @@ const defaultOpts = {
   low: null,
   high: null,
   volume: { base: null, quote: null },
-  trades: null,
+  trades: 0,
   timestamp: null,
 };
 const fromZCandle = (opts) => {
@@ -76,7 +76,7 @@ class Candle {
 
     if(!this.closeTime) this.closeTime = calculateCloseTime(this);
 
-    this.trades = (opts?.trades) ? get(opts, 'trades').toString() : defaultOpts.trades;
+    this.trades = (opts?.trades) ? parseInt(get(opts, 'trades')) : defaultOpts.trades;
 
     this.id = (opts?.id) ? get(opts, 'id').toString() : null;
   }
