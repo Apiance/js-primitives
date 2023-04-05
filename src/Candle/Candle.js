@@ -3,8 +3,6 @@ const Epoch = require('../Epoch/Epoch');
 const Exchange = require('../Exchange/Exchange');
 const Market = require('../Market/Market');
 const calculateCloseTime = require('./utils/calculateCloseTime');
-const {h} = require("../Epoch/constants/timeframes");
-const computeCandleId = require("./utils/computeCandleId");
 const defaultOpts = {
   exchange: null,
   symbol: null,
@@ -80,29 +78,11 @@ class Candle {
 
     this.trades = (opts?.trades) ? get(opts, 'trades').toString() : defaultOpts.trades;
 
-    this.id = (opts?.id) ? get(opts, 'id').toString() : computeCandleId(this);
-
-    this.tradesIds = [];
-  }
-  considerTradeId(tradeId){
-    if(tradeId){
-      if(!this.tradesIds.includes(tradeId)){
-        this.tradesIds.push(tradeId)
-        const hash = (Number(`0x${this.hash}`) + parseInt(tradeId)).toString(16);
-        this.hash = hash
-        if(this.tradesIds.length > 50000){
-          this.tradesIds.shift();
-        }
-        return true;
-      }
-    }
-    return false;
-  }
-  getHash(){
-    return this.hash;
+    this.id = (opts?.id) ? get(opts, 'id').toString() : null;
   }
 };
 Candle.prototype.considerNewLastPrice = require('./methods/considerNewLastPrice');
+Candle.prototype.considerTradeId = require('./methods/considerTradeId');
 Candle.prototype.isWithinInterval = require('./methods/isWithinInterval');
 Candle.prototype.toCompressed = require('./methods/toCompressed');
 Candle.prototype.toZCandle = require('./methods/toZCandle');
