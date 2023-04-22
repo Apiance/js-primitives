@@ -19,19 +19,31 @@ module.exports = function get(unit) {
     case "dayOfWeek":
       return new Date(this.date).getDay();
     case "year":
+    case "Y":
+    case "y":
       return this.date.split('-')[0];
     case "month":
+    case "M":
       return this.date.split('-')[1];
     case "day":
+    case "d":
+    case "D":
       return this.date.split('-')[2].slice(0,2);
     case "hour":
+    case "h":
+    case "H":
       return this.date.split(':')[0].slice(-2);
     case "minute":
+    case "min":
+    case "m":
       return this.date.split(':')[1];
     case "second":
+    case "sec":
+    case "s":
        subPart = this.date.split(':')[2];
        return subPart.split('.')[0];
     case "millisecond":
+    case "ms":
       subPart = this.date.split('.')[1];
       lastChar = subPart[subPart.length-1];
       if(Number.isNaN(Number(lastChar))){
