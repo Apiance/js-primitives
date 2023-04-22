@@ -7,9 +7,11 @@
   "scripts": {
     "test": "mocha 'src/**/*.spec.js'"
   },
+  "homepage": "https://www.apiance.io",
   "repository": {
     "type": "git",
-    "url": "git@apiance.github.com:Apiance/js-primitives.git"
+    "url": "git@apiance.github.com:Apiance/js-primitives.git",
+    "web": "https://github.com/Apiance/js-primitives/"
   },
   "author": "Apiance (contact@apiance.io)",
   "license": "APIANCE-OS1",
