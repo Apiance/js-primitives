@@ -1,27 +1,25 @@
 let milliSecondsInTimeframe = require('../utils/getTimeframeDurationInMilliseconds');
-const { longs, shorts } = require('../constants/months');
 module.exports = function add(unit, value) {
+  const curYear = this.get('year');
   switch (unit) {
     case "year":
     case "Y":
     case "y":
-      let curYear = this.get('year');
       this.set('year', Number(curYear)+value)
       return this;
     case "month":
     case "M":
-      let curMon = this.get('month');
-      if(Number(curMon)+value>12){
+      const curMon = this.get('month');
+      const isLeapYear = curYear % 4 === 0 && curYear % 100 !== 0 || curYear % 400 === 0;
+      if (Number(curMon) + value > 12) {
         add.call(this,'year', Math.floor((Number(curMon)+value) / 12));
         this.set('month',(Number(curMon)+value) % 12);
-      }else{
-        this.set('month', Number(curMon)+value)
-        // FIXME
-        // in this case, sometimes day is not valid
-        if(shorts.includes(this.get('month'))){
-          if(this.get('day') > '30'){
-            this.set('day', '30')
-          }
+      } else {
+        this.set('month', Number(curMon) + value);
+        const newMonth = this.get('month');
+        const daysInMonth = newMonth === 2 ? isLeapYear ? 29 : 28 : ["04", "06", "09", "11"].includes(newMonth) ? 30 : 31;
+        if (this.get('day') > daysInMonth) {
+          this.set('day', daysInMonth);
         }
       }
       return this;
