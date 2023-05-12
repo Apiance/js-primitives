@@ -100,6 +100,7 @@ describe('Epoch', function suite(){
     expect(e1.add('month',1).date).to.equal('2020-10-30T01:34:58.130Z');
     expect(e1.add('year',1).date).to.equal('2021-10-30T01:34:58.130Z');
     expect(e1.add('week',1).date).to.equal('2021-11-06T01:34:58.130Z');
+
   });
   it('should substract unit', function () {
     const e1 = new Epoch('2020-08-02T00:33:58.130Z')
@@ -112,3 +113,38 @@ describe('Epoch', function suite(){
     expect(e1.subtract('week',1).date).to.equal('2019-05-23T23:32:58.130Z');
   });
 });
+  it('should handle subtracting months with different number of days', function () {
+    const e1 = new Epoch('2020-03-31T00:00:00.000Z');
+    expect(e1.subtract('month', 1).date).to.equal('2020-02-29T00:00:00.000Z');
+    const e2 = new Epoch('2020-03-01T00:00:00.000Z');
+    expect(e2.subtract('month', 2).date).to.equal('2020-01-01T00:00:00.000Z');
+  });
+
+  it('should handle adding weeks spanning across months', function () {
+    const e1 = new Epoch('2020-01-26T00:00:00.000Z'); // Last Sunday in January 2020
+    expect(e1.add('week', 1).date).to.equal('2020-02-02T00:00:00.000Z'); // First Sunday in February 2020
+  });
+
+  it('should handle subtracting weeks spanning across months', function () {
+    const e1 = new Epoch('2020-02-02T00:00:00.000Z'); // First Sunday in February 2020
+    expect(e1.subtract('week', 1).date).to.equal('2020-01-26T00:00:00.000Z'); // Last Sunday in January 2020
+  });
+
+  it('should handle adding and subtracting large values of units', function () {
+    const e1 = new Epoch('2020-01-01T00:00:00.000Z');
+    expect(e1.add('year', 1000).date).to.equal('3020-01-01T00:00:00.000Z');
+    expect(e1.add('month', 10000).date).to.equal('3853-05-01T00:00:00.000Z');
+    expect(e1.add('week', 10000).date).to.equal('4044-12-25T00:00:00.000Z');
+    expect(e1.add('day', 10000).date).to.equal('4072-05-12T00:00:00.000Z');
+    expect(e1.add('hour', 100000).date).to.equal('4083-10-08T16:00:00.000Z');
+    expect(e1.add('minute', 1000000).date).to.equal('4085-09-01T10:40:00.000Z');
+    expect(e1.add('second', 10000000).date).to.equal('4085-12-26T04:26:40.000Z');
+
+    expect(e1.subtract('year', 1000).date).to.equal('3085-12-26T04:26:40.000Z');
+    expect(e1.subtract('month', 10000).date).to.equal('2252-08-26T04:26:40.000Z');
+    expect(e1.subtract('week', 10000).date).to.equal('2060-12-30T04:26:40.000Z');
+    expect(e1.subtract('day', 10000).date).to.equal('2033-08-14T04:26:40.000Z');
+    expect(e1.subtract('hour', 100000).date).to.equal('2022-03-18T12:26:40.000Z');
+    expect(e1.subtract('minute', 1000000).date).to.equal('2020-04-23T01:46:40.000Z');
+    expect(e1.subtract('second', 10000000).date).to.equal('2019-12-29T08:00:00.000Z');
+  });

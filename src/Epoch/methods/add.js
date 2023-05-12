@@ -17,7 +17,7 @@ module.exports = function add(unit, value) {
       } else {
         this.set('month', Number(curMon) + value);
         const newMonth = this.get('month');
-        const daysInMonth = newMonth === 2 ? isLeapYear ? 29 : 28 : ["04", "06", "09", "11"].includes(newMonth) ? 30 : 31;
+        const daysInMonth = newMonth === "02" ? isLeapYear ? 29 : 28 : ["04", "06", "09", "11"].includes(newMonth) ? 30 : 31;
         if (this.get('day') > daysInMonth) {
           this.set('day', daysInMonth);
         }
