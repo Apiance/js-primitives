@@ -19,8 +19,8 @@
     "big.js": "^6.2.1",
     "eventemitter2": "^6.4.9",
     "lodash.get": "^4.4.2",
-    "pino": "^8.6.1",
-    "pino-pretty": "^9.1.1"
+    "pino": "^8.14.1",
+    "pino-pretty": "^9.4.1"
   },
   "devDependencies": {
     "chai": "^4.3.6",
