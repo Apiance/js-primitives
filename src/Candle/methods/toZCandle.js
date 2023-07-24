@@ -1,4 +1,5 @@
 const ZCandle = require('../../ZCandle/ZCandle');
 module.exports = function toZCandle(){
-  return new ZCandle(this.toCompressed());
+  const compressed = this.toCompressed();
+  return new ZCandle(compressed);
 }
