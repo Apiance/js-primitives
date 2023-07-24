@@ -10,40 +10,37 @@ module.exports = function subtract(unit, value) {
       return this;
     case "month":
     case "M":
-      const curMon = this.get('month');
-      const isLeapYear = curYear % 4 === 0 && curYear % 100 !== 0 || curYear % 400 === 0;
-
-      if(Number(curMon) - value <= 0) {
-        subtract.call(this,'year', Math.abs(Math.floor((Number(curMon)+value) / 12)));
-        this.set('month',(Number(curMon) - value) % 12);
-      } else {
-        this.set('month', Number(curMon) - value);
-        const newMonth = this.get('month');
-        const daysInMonth = newMonth === "02" ? isLeapYear ? 29 : 28 : ["04", "06", "09", "11"].includes(newMonth) ? 30 : 31;
-        if (this.get('day') > daysInMonth) {
-          this.set('day', daysInMonth);
-        }
-      }
+      const dm = new Date(this.date);
+      dm.setUTCMonth(dm.getUTCMonth() - value);
+      this.date = new this.constructor({date: dm.toISOString()}).date
       return this;
     case "week":
     case "W":
     case "w":
-      this.date = this.constructor.fromNumber(this.to('ms') - value * getTimeframeDurationInMilliseconds("W")).date
+      const dw = new Date(this.date);
+      dw.setUTCDate(dw.getUTCDate() - (value * 7))
+      this.date = new this.constructor({date: dw.toISOString()}).date
       return this;
     case "day":
     case "D":
     case "d":
-      this.date = this.constructor.fromNumber(this.to('ms') - value * getTimeframeDurationInMilliseconds("d")).date
+      const dd = new Date(this.date);
+      dd.setUTCDate(dd.getUTCDate() - (value))
+      this.date = new this.constructor({date: dd.toISOString()}).date
       return this;
     case "hour":
     case "H":
     case "h":
-      this.date = this.constructor.fromNumber(this.to('ms') - value * getTimeframeDurationInMilliseconds("h")).date;
+      const dh = new Date(this.date);
+      dh.setUTCHours(dh.getUTCHours() - (value))
+      this.date = new this.constructor({date: dh.toISOString()}).date
       return this;
     case "minute":
     case "min":
     case "m":
-      this.date =  this.constructor.fromNumber(this.to('ms') - value * getTimeframeDurationInMilliseconds("m")).date;
+      const dmin = new Date(this.date);
+      dmin.setUTCMinutes(dmin.getUTCMinutes() - (value))
+      this.date = new this.constructor({date: dmin.toISOString()}).date
       return this;
     case "second":
     case "sec":
