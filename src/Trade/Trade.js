@@ -1,5 +1,6 @@
 const Market = require('../Market/Market');
 const Epoch = require('../Epoch/Epoch');
+console.log('Trade Epoch', Epoch.constructor);
 const computeTradeId = require('./utils/computeTradeId.js');
 class Trade {
   /**
