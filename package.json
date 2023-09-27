@@ -1,6 +1,6 @@
 {
   "name": "@apiance/js-primitives",
-  "version": "3.0.0",
+  "version": "3.1.0",
   "description": "A set of commons primitives used in the Apiance stack. See apiance.io",
   "main": "index.js",
   "private": false,
@@ -23,8 +23,8 @@
     "pino-pretty": "^9.4.1"
   },
   "devDependencies": {
-    "chai": "^4.3.6",
-    "eslint": "^8.25.0",
+    "chai": "^4.3.8",
+    "eslint": "^8.50.0",
     "eslint-config-airbnb-base": "^15.0.0",
     "eslint-plugin-import": "^2.26.0",
     "mocha": "^10.1.0"
