@@ -21,28 +21,29 @@ import Trade from "./src/Trade/Trade.js";
 import ZCandle from "./src/ZCandle/ZCandle.js";
 import ZTrade from "./src/ZTrade/ZTrade.js";
 
-export default {
-  Asset: Asset,
-    Candle: Candle,
-    CandleSet: CandleSet,
-    Command: Command,
-    Epoch: Epoch,
-    EventMessage: EventMessage,
-    Exchange: Exchange,
-    Instrument: Instrument,
-    KeyChain: KeyChain,
-    Keys: Keys,
-    Location: Location,
-    Market: Market,
-    Organization: Organization,
-    Person: Person,
-    Persona: Persona,
-    Queue: Queue,
-    SocketMessage: SocketMessage,
-    Tick: Tick,
-    Ticker: Ticker,
-    Trade: Trade,
-    ZCandle: ZCandle,
-    ZTrade: ZTrade,
-
+export {
+    Asset,
+    Candle,
+    CandleSet,
+    Command,
+    Epoch,
+    EventMessage,
+    Exchange,
+    Instrument,
+    KeyChain,
+    Keys,
+    Location,
+    Market,
+    Organization,
+    Person,
+    Persona,
+    Queue,
+    SocketMessage,
+    Tick,
+    Ticker,
+    Trade,
+    ZCandle,
+    ZTrade
 }
+
+
