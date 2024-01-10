@@ -1,6 +1,5 @@
-const {expect} = require('chai');
-const Asset = require('./Asset');
-
+import { expect } from 'chai';
+import Asset from './Asset.js';
 describe('Asset', function suite() {
   let asset;
   it('should instantiates with now as default', () => {

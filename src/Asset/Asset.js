@@ -7,4 +7,5 @@ class Asset {
     Object.assign(this, otherProps);
   }
 };
-module.exports = Asset;
+
+export default Asset;
