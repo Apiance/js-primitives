@@ -21,5 +21,4 @@ module.exports = {
   Trade: require('./src/Trade/Trade'),
   ZCandle: require('./src/ZCandle/ZCandle'),
   ZTrade: require('./src/ZTrade/ZTrade'),
-  createLogger: require('./src/createLogger'),
 }
