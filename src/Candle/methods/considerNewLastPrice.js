@@ -33,8 +33,7 @@ module.exports = function considerNewLastPrice(lastPrice, amount = null, tradesQ
   if(lastPrice<this.low || this.low === null) this.low = lastPrice.toString();
 
   if(tradesQty !== null){
-    const trades = parseInt(this.trades) + parseInt(tradesQty);
-    this.trades = trades.toString()
+    this.trades = this.trades + parseInt(tradesQty);
   }
 
   return true;

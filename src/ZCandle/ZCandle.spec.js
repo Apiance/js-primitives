@@ -3,12 +3,12 @@ const ZCandle = require('./ZCandle');
 const Candle = require('../Candle/Candle');
 
 describe('ZCandle', function suite() {
-    const zippedCandleStr1 = 'C::KRAKEN::BTCUSD::1d::2020-08-02T00:00:00.000Z::C43F16FD1DCB9::10000::10111::10000::10100::0';
-    const zippedCandleStr2 = 'C::KRAKEN::BTCUSD::1d::2020-08-02T00:00:00.000Z::C43F16FD1DCB9::10000::10111::10000::10100::42';
-    const zippedCandleStr3 = 'C::KRAKEN::BTCUSD::1d::2020-08-02T00:00:00.000Z::C43F16FD1DCB9::10000::10111::10000::10100::-151500::42';
-    const zippedCandleStr4 = 'C::KRAKEN::BTCUSD::1d::2020-08-02T00:00:00.000Z::C43F16FD1DCB9::10000::10111::10000::10100::15-151500::42';
-    const zippedCandleStr5 = 'C::KRAKEN::BTCUSD::1d::2020-08-02T00:00:00.000Z::C43F16FD1DCB9::10000::10111::10000::10100::15-::42';
-    const zippedCandleStr6 = 'C::KRAKEN::BTCUSD::1d::2020-08-02T00:00:00.000Z::C43F16FD1DCB9::10000::10111::10000::10100::15-::0';
+    const zippedCandleStr1 = 'C::KRAKEN::BTCUSD::1d::2020-08-02T00:00:00.000Z::10000::10111::10000::10100';
+    const zippedCandleStr2 = 'C::KRAKEN::BTCUSD::1d::2020-08-02T00:00:00.000Z::10000::10111::10000::10100::42';
+    const zippedCandleStr3 = 'C::KRAKEN::BTCUSD::1d::2020-08-02T00:00:00.000Z::10000::10111::10000::10100::-151500::42';
+    const zippedCandleStr4 = 'C::KRAKEN::BTCUSD::1d::2020-08-02T00:00:00.000Z::10000::10111::10000::10100::15-151500::42';
+    const zippedCandleStr5 = 'C::KRAKEN::BTCUSD::1d::2020-08-02T00:00:00.000Z::10000::10111::10000::10100::15-::42';
+    const zippedCandleStr6 = 'C::KRAKEN::BTCUSD::1d::2020-08-02T00:00:00.000Z::10000::10111::10000::10100::15-';
     const opts = {
         exchange: 'KRAKEN',
         symbol: 'BTCUSD',

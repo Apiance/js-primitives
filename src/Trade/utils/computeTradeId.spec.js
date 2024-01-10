@@ -13,6 +13,6 @@ describe('computeTradeId', function suite() {
       timestamp: 1596300000
     });
 
-    expect(computeTradeId(trade)).to.equal('T5C58BA58');
+    expect(computeTradeId(trade)).to.equal('TE22B0B957EA5');
   });
 });

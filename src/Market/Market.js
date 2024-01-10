@@ -67,7 +67,7 @@ class Market {
       return `${this.exchange.toString()}::${this.symbol}`
     }
 
-    return (this.type) ? `${this.exchange?.toString()}::${this.type}-${marketId}` : `${this.exchange?.toString()}::${marketId}`;
+    return (this.type) ? `${this.exchange.toString()}::${this.type}-${marketId}` : `${this.exchange.toString()}::${marketId}`;
   }
   toCompressed(){
     return this.toString();

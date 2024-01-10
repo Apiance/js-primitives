@@ -9,10 +9,8 @@ describe('Tick', function suite() {
   });
   it('should init from params', function () {
     ticker = new Tick({
-      market: {
-        symbol:"ABCUSD"
-      }
+      symbol: "ABCUSD"
     });
-    expect(ticker.market.symbol).to.deep.equal('ABCUSD');
+    expect(ticker.symbol).to.deep.equal('ABCUSD');
   });
 });

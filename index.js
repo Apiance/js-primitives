@@ -14,7 +14,6 @@ module.exports = {
   Organization: require('./src/Organization/Organization'),
   Person: require('./src/Person/Person'),
   Persona: require('./src/Persona/Persona'),
-  Queue: require('./src/Queue/Queue'),
   SocketMessage: require('./src/SocketMessage/SocketMessage'),
   Ticker: require('./src/Ticker/Ticker'),
   Tick: require('./src/Tick/Tick'),
