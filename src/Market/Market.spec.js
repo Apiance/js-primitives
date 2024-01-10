@@ -37,7 +37,14 @@ const CASES = [
         type: Market.MARKET_TYPES.PERP,
         quote: 'DEF',
         base: 'ABC',
-    }]
+    }],
+    ['SOMETHING::USOILUSD',{
+        exchange: 'SOMETHING',
+        symbol: 'USOILUSD',
+        type: Market.MARKET_TYPES.PERP,
+        quote: 'USD',
+        base: 'USOIL',
+    }],
 ]
 
 

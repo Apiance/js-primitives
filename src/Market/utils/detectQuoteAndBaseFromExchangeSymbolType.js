@@ -24,7 +24,7 @@ export default function detectQuoteAndBaseFromExchangeSymbolType(exchange, symbo
             // otherwise it's a perp, and the quote is in the name of the symbol (usually USDT/USDC)
             // So we need to pattern match the symbol to get the quote
             const spotPattern = /([A-Z]+)-([A-Z]+)/;
-            const perpPattern = /([A-Z]+)(USDT|USDC|BTC|ETH)/;
+            const perpPattern = /([A-Z]+)(USDT|USDC|BTC|ETH|USD)/;
 
 
             switch (type) {
