@@ -41,7 +41,7 @@ describe('Candle', function suite(){
     expect(candle.low).to.equal('10000');
     expect(candle.interval).to.equal('1d');
     expect(candle.volume).to.deep.equal({base: null, quote: null});
-    expect(candle.trades).to.deep.equal(null);
+    expect(candle.trades).to.deep.equal('0');
     expect(candle.openTime).to.deep.equal(new Epoch('2020-08-02T00:00:00.000Z'));
     expect(candle.closeTime).to.deep.equal(new Epoch('2020-08-02T23:59:59.999Z'));
 
@@ -56,6 +56,31 @@ describe('Candle', function suite(){
      candle6 = new Candle(opts6);
 
   });
+  it('should create', function () {
+    const candle = new Candle({
+        market: {
+            exchange: 'BINANCE',
+            symbol: 'ETHUSDT',
+        },
+        interval: '1m',
+      openTime: '2023-07-24T12:47:00.000Z',
+    });
+    candle.considerNewLastPrice(1828.99, 0.34, 1);
+    candle.considerTradeId('97255635BB99');
+    expect(candle).to.exist;
+    expect(candle.trades).to.equal('1')
+    expect(candle.volume.base).to.equal('0.34')
+    expect(candle.volume.quote).to.equal('621.8566')
+    expect(candle.id).to.equal('0355290c')
+    candle.considerNewLastPrice(1829.99, 2, 1);
+    candle.considerTradeId('97255635BC99');
+    candle.considerNewLastPrice(1827.98, 0.3, 1);
+    candle.considerTradeId('97255635BC959');
+    candle.considerNewLastPrice(1828.58, 0.3, 1);
+    candle.considerTradeId('97255635BC939');
+    const expected = 'C::BINANCE::ETHUSDT::1m::2023-07-24T12:47:00.000Z::96cb4097::1828.99::1829.99::1827.98::1828.58::2.94-5378.8046::4';
+    expect(candle.toCompressed()).to.deep.equal(expected)
+  });
   it('should calculate closeTime', function () {
     const candleDay = new Candle({interval: '1d', openTime: opts.timestamp});
     expect(candleDay.closeTime).to.deep.equal(new Epoch('2020-08-02T23:59:59.999Z'));
@@ -67,27 +92,25 @@ describe('Candle', function suite(){
     expect(candleMin.closeTime).to.deep.equal(new Epoch('2020-08-02T00:00:59.999Z'));
   });
   it('should to ZCandle', function () {
-    expect(candle.toZCandle()).to.deep.equal(new ZCandle('C::KRAKEN::BTCUSD::1d::2020-08-02T00:00:00.000Z::10000::10111::10000::10100'))
+    expect(candle.toZCandle()).to.deep.equal(new ZCandle('C::KRAKEN::BTCUSD::1d::2020-08-02T00:00:00.000Z::C43F16FD1DCB9::10000::10111::10000::10100::0'))
   });
   it('should to compress', function () {
-    expect(candle.toCompressed()).to.deep.equal('C::KRAKEN::BTCUSD::1d::2020-08-02T00:00:00.000Z::10000::10111::10000::10100')
+    expect(candle.toCompressed()).to.deep.equal('C::KRAKEN::BTCUSD::1d::2020-08-02T00:00:00.000Z::C43F16FD1DCB9::10000::10111::10000::10100::0')
   });
   it('should from compressed', function () {
     const candleFromZCandle = new Candle(candle.toZCandle());
     expect(candleFromZCandle).to.deep.equal(candle);
 
-    const compressed1 ='C::KRAKEN::BTCUSD::1d::2020-08-02T00:00:00.000Z::10000::10111::10000::10100';
-    const compressed2 = 'C::KRAKEN::BTCUSD::1d::2020-08-02T00:00:00.000Z::10000::10111::10000::10100::42';
-    const compressed3 = 'C::KRAKEN::BTCUSD::1d::2020-08-02T00:00:00.000Z::10000::10111::10000::10100::31-42::42';
-    const compressed4 = 'C::KRAKEN::BTCUSD::1d::2020-08-02T00:00:00.000Z::10000::10111::10000::10100::31-::42';
-    const compressed5 = 'C::KRAKEN::BTCUSD::1d::2020-08-02T00:00:00.000Z::10000::10111::10000::10100::-42::42'
+    const compressed1 ='C::KRAKEN::BTCUSD::1d::2020-08-02T00:00:00.000Z::C43F16FD1DCB9::10000::10111::10000::10100::0';
+    const compressed2 = 'C::KRAKEN::BTCUSD::1d::2020-08-02T00:00:00.000Z::C43F16FD1DCB9::10000::10111::10000::10100::42';
+    const compressed3 = 'C::KRAKEN::BTCUSD::1d::2020-08-02T00:00:00.000Z::C43F16FD1DCB9::10000::10111::10000::10100::31-42::42';
+    const compressed4 = 'C::KRAKEN::BTCUSD::1d::2020-08-02T00:00:00.000Z::C43F16FD1DCB9::10000::10111::10000::10100::31-::42';
+    const compressed5 = 'C::KRAKEN::BTCUSD::1d::2020-08-02T00:00:00.000Z::C43F16FD1DCB9::10000::10111::10000::10100::-42::42'
     expect(new Candle(compressed1).toCompressed()).to.equal(compressed1);
     expect(new Candle(compressed2).toCompressed()).to.equal(compressed2);
     expect(new Candle(compressed3).toCompressed()).to.equal(compressed3);
     expect(new Candle(compressed4).toCompressed()).to.equal(compressed4);
     expect(new Candle(compressed5).toCompressed()).to.equal(compressed5);
-
-
   });
   it('should isWithinInterval', function () {
     candle.isWithinInterval(new Epoch());
@@ -121,7 +144,7 @@ describe('Candle', function suite(){
         trades: 60
     };
     const fullCandle = new Candle(x);
-    expect(fullCandle.toCompressed()).to.equal('C::KRAKEN::P-BTC-USD::1d::2020-08-02T00:00:00.000Z::10000::10111::10000::10100::0.01-100::60');
+    expect(fullCandle.toCompressed()).to.equal('C::KRAKEN::P-BTC-USD::1d::2020-08-02T00:00:00.000Z::C90B8A9C5D7C9::10000::10111::10000::10100::0.01-100::60');
   });
   it('should toCompressed', function () {
     const opts = {
@@ -135,11 +158,11 @@ describe('Candle', function suite(){
       low: '10000',
     }
 
-    expect(new Candle(opts).toCompressed()).to.equal('C::KRAKEN::BTCUSD::1d::2020-08-02T00:00:00.000Z::10000::10111::10000::10100');
-    expect(new Candle({...opts, trades: 42}).toCompressed()).to.equal('C::KRAKEN::BTCUSD::1d::2020-08-02T00:00:00.000Z::10000::10111::10000::10100::42');
-    expect(new Candle({...opts, trades: 42, volume: {quote:42, base: 31}}).toCompressed()).to.equal('C::KRAKEN::BTCUSD::1d::2020-08-02T00:00:00.000Z::10000::10111::10000::10100::31-42::42');
-    expect(new Candle({...opts, trades: 42, volume: {base: 31}}).toCompressed()).to.equal('C::KRAKEN::BTCUSD::1d::2020-08-02T00:00:00.000Z::10000::10111::10000::10100::31-::42');
-    expect(new Candle({...opts, trades: 42, volume: {quote:42}}).toCompressed()).to.equal('C::KRAKEN::BTCUSD::1d::2020-08-02T00:00:00.000Z::10000::10111::10000::10100::-42::42');
+    expect(new Candle(opts).toCompressed()).to.equal('C::KRAKEN::BTCUSD::1d::2020-08-02T00:00:00.000Z::C43F16FD1DCB9::10000::10111::10000::10100::0');
+    expect(new Candle({...opts, trades: 42}).toCompressed()).to.equal('C::KRAKEN::BTCUSD::1d::2020-08-02T00:00:00.000Z::C43F16FD1DCB9::10000::10111::10000::10100::42');
+    expect(new Candle({...opts, trades: 42, volume: {quote:42, base: 31}}).toCompressed()).to.equal('C::KRAKEN::BTCUSD::1d::2020-08-02T00:00:00.000Z::C43F16FD1DCB9::10000::10111::10000::10100::31-42::42');
+    expect(new Candle({...opts, trades: 42, volume: {base: 31}}).toCompressed()).to.equal('C::KRAKEN::BTCUSD::1d::2020-08-02T00:00:00.000Z::C43F16FD1DCB9::10000::10111::10000::10100::31-::42');
+    expect(new Candle({...opts, trades: 42, volume: {quote:42}}).toCompressed()).to.equal('C::KRAKEN::BTCUSD::1d::2020-08-02T00:00:00.000Z::C43F16FD1DCB9::10000::10111::10000::10100::-42::42');
   });
   it('should correctly translate to string numerical value', function () {
     const c = new Candle({
@@ -155,7 +178,7 @@ describe('Candle', function suite(){
         volume: { base: 0.0044, quote: 84.1717 },
         openTime: { date: '2022-10-15T18:27:00.000Z' },
         closeTime:  { date: '2022-10-15T18:27:09.999Z' },
-        trades: 4
+        trades: '4'
     });
     expect(c.open).to.equal('19130')
     expect(c.close).to.equal('19130')
@@ -166,14 +189,14 @@ describe('Candle', function suite(){
     expect(c.trades).to.equal('4')
   });
   it('should toJSON', function(){
-    const c = new Candle('C::FTX::BTC-PERP::10s::2022-10-15T18:27:00.000Z::19130::19130::19129::19130::0.0044-84.1717::4');
+    const c = new Candle('C::BINANCE::BTCUSD::10s::2022-10-15T18:27:00.000Z::C00000000::19130::19130::19129::19130::0.0044-84.1717::4');
     const json = c.toJSON();
     expect(json.market).to.deep.equal({
-      exchange: 'FTX',
-      type: "PERP",
-      symbol: 'BTC-PERP',
-      base: "BTC",
-      quote: "USD",
+      exchange: 'BINANCE',
+      symbol: 'BTCUSD',
+      base: null,
+      quote: null,
+      type: null,
     });
     expect(json.interval).to.deep.equal('10s');
     expect(json.open).to.deep.equal('19130');

@@ -2,6 +2,7 @@ const { expect } = require('chai');
 const Trade = require('./Trade');
 
 describe('Trade', function suite(){
+  let trade;
   const data = {
     exchange: 'BINANCE',
     symbol: 'ETHBTC',
@@ -57,6 +58,6 @@ describe('Trade', function suite(){
       timestamp: 1596300000
     });
     const ztrade = trade.toZTrade();
-    expect(ztrade.toString()).to.equal('Z::KRAKEN::BTCUSD::2020-08-01T16:40:00.000Z::TB0DEBCCD6FA7::10000::1::-1::null::null');
+    expect(ztrade.toString()).to.equal('Z::KRAKEN::BTCUSD::2020-08-01T16:40:00.000Z::TB0DEBCC5::10000::1::-1::null::null');
   });
 });
