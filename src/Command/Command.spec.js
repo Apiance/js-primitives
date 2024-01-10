@@ -1,5 +1,5 @@
-const {expect} = require('chai');
-const Command = require('./Command');
+import {expect, describe, it} from 'vitest';
+import Command from './Command.js';
 describe('Command', function suite() {
   const serviceID = 'SERVICE/NODE';
   const action = Command.ACTIONS.FETCH;
@@ -33,7 +33,7 @@ describe('Command', function suite() {
       serviceID: '@kandlfeed/js-client@1.0.0',
       action: 'SUBSCRIBE',
       context: 'candles',
-      opts: { exchange: 'BINANCE', symbol:"BTCUSD", interval: '4h' }
+      payload: { exchange: 'BINANCE', symbol:"BTCUSD", interval: '4h' }
     }
     const cmd = new Command(opts);
 

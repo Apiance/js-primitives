@@ -1,4 +1,4 @@
-module.exports = {
+export default {
   'ms': 1,
   's': 1000,
   'm': 60000,

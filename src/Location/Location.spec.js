@@ -1,5 +1,5 @@
-const {expect} = require('chai');
-const Location = require('./Location');
+import { expect, describe, it } from 'vitest';
+import Location from './Location';
 
 describe('Location', function suite() {
   let location;

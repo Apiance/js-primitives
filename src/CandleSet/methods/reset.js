@@ -1,7 +1,7 @@
 /**
  * Reset the local arrays
  */
-module.exports = function reset() {
+export default function reset() {
   this.candles = [];
   this.candleIds = [];
 };

@@ -1,4 +1,4 @@
-module.exports = function startOf(unit, opts = {}) {
+export default function startOf(unit, opts = {}) {
   switch (unit) {
     case "year":
     case "Y":

@@ -1,4 +1,4 @@
-module.exports = {
+export default {
   longs : ['01', '03', '05', '07', '08', '10', '12'],
   shorts : ['02', '04', '06', '09', '11'],
 }

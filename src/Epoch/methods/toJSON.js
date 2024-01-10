@@ -1,4 +1,4 @@
-module.exports = function toString() {
+export default function toJSON() {
   return { date: this.date } ;
 
 }

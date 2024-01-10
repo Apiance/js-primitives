@@ -1,8 +1,7 @@
-const { expect } = require('chai');
-const set = require('./set');
-const get = require('./get');
-const startOf = require('./startOf');
-
+import {expect, describe,it} from "vitest";
+import set from "./set.js";
+import get from "./get.js";
+import startOf from "./startOf.js";
 const initial = '2020-08-02T01:33:58.000Z';
 
 describe('Epoch.startOf', function suite(){

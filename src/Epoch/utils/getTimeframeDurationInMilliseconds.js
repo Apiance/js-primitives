@@ -1,6 +1,6 @@
-const timeframes = require('../constants/timeframes');
+import timeframes from '../constants/timeframes.js';
 
 function getTimeframeDurationInMilliseconds(tf){
   return timeframes[tf];
 }
-module.exports = getTimeframeDurationInMilliseconds;
+export default getTimeframeDurationInMilliseconds;

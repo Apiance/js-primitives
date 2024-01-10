@@ -1,11 +1,11 @@
 {
   "name": "@apiance/js-primitives",
-  "version": "2.8.1",
+  "version": "4.0.0",
   "description": "A set of commons primitives used in the Apiance stack. See apiance.io",
   "main": "index.js",
   "private": false,
   "scripts": {
-    "test": "mocha 'src/**/*.spec.js'"
+    "test": "vitest src/**/*.spec.js"
   },
   "homepage": "https://www.apiance.io",
   "repository": {
@@ -13,20 +13,13 @@
     "url": "git@apiance.github.com:Apiance/js-primitives.git",
     "web": "https://github.com/Apiance/js-primitives/"
   },
+  "type": "module",
   "author": "Apiance (contact@apiance.io)",
   "license": "APIANCE-OS1",
   "dependencies": {
-    "big.js": "^6.2.1",
-    "eventemitter2": "^6.4.9",
-    "lodash.get": "^4.4.2",
-    "pino": "^8.6.1",
-    "pino-pretty": "^9.1.1"
+    "big.js": "^6.2.1"
   },
   "devDependencies": {
-    "chai": "^4.3.6",
-    "eslint": "^8.25.0",
-    "eslint-config-airbnb-base": "^15.0.0",
-    "eslint-plugin-import": "^2.26.0",
-    "mocha": "^10.1.0"
+    "vitest": "^1.1.3"
   }
 }

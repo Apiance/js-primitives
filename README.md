@@ -4,58 +4,154 @@
 > 
 
 ### Asset 
-`const { Asset } = require('@apiance/js-primitives')`
 
-### Candle
-`const { Candle } = require('@apiance/js-primitives')`
+```js
+import { Asset } from '@apiance/primitives';
+
+const asset = new Asset({
+    name: 'Bitcoin',
+    isoCode: 'BTC'
+});
+```
+
+### Candle 
+
+```js
+import { Candle } from '@apiance/primitives';
+
+const candle = new Candle({
+    market: "KRAKEN::BTC-USD",
+    interval: '1d',
+    openTime: '2020-08-02T00:00:00.142Z',
+    closeTime: '2020-08-02T00:59:59.999Z',
+    open: '10000',
+    close: '10100',
+    high: '10111',
+    low: '10000',
+    volume: { base:'0.01', quote: '100' },
+    trades: 60
+});
+```
 
 ### CandleSet
-`const { CandleSet } = require('@apiance/js-primitives')`
+
+```js
+import { CandleSet } from '@apiance/primitives';
+```
 
 ### Command
-`const { Command } = require('@apiance/js-primitives')`
+
+```js
+import { Command } from '@apiance/primitives';
+```
 
 ### Epoch
-`const { Epoch } = require('@apiance/js-primitives')`
+
+```js
+import { Epoch } from '@apiance/primitives';
+```
+
+### EventMessage
+
+```js
+import { EventMessage } from '@apiance/primitives';
+```
 
 ### Exchange
-`const { Exchange } = require('@apiance/js-primitives')`
+
+```js
+import { Exchange } from '@apiance/primitives';
+```
 
 ### Instrument
-`const { Instrument } = require('@apiance/js-primitives')`
+
+```js
+import { Instrument } from '@apiance/primitives';
+```
 
 ### KeyChain
-`const { KeyChain } = require('@apiance/js-primitives')`
+
+```js
+import { KeyChain } from '@apiance/primitives';
+```
 
 ### Keys
-`const { Keys } = require('@apiance/js-primitives')`
+
+```js
+import { Keys } from '@apiance/primitives';
+```
 
 ### Location
-`const { Location } = require('@apiance/js-primitives')`
+
+```js
+import { Location } from '@apiance/primitives';
+```
 
 ### Market
-`const { Market } = require('@apiance/js-primitives')`
+
+```js
+import { Market } from '@apiance/primitives';
+```
 
 ### Organization
-`const { Organization } = require('@apiance/js-primitives')`
+
+```js
+import { Organization } from '@apiance/primitives';
+```
+
 
 ### Person
-`const { Person } = require('@apiance/js-primitives')`
+
+```js
+import { Person } from '@apiance/primitives';
+```
+
 
 ### Persona
-`const { Persona } = require('@apiance/js-primitives')`
+
+```js
+import { Persona } from '@apiance/primitives';
+```
+
+### Queue
+
+```js
+import { Queue } from '@apiance/primitives';
+```
+
+### SocketMessage
+
+```js
+import { SocketMessage } from '@apiance/primitives';
+```
+
+### Tick
+
+```js
+import { Tick } from '@apiance/primitives';
+```
 
 ### Ticker
-`const { Ticker } = require('@apiance/js-primitives')`
+
+```js
+import { Ticker } from '@apiance/primitives';
+```
 
 ### Trade
-`const { Trade } = require('@apiance/js-primitives')`
+
+```js
+import { Trade } from '@apiance/primitives';
+```
 
 ### ZCandle
-`const { ZCandle } = require('@apiance/js-primitives')`
+
+```js
+import { ZCandle } from '@apiance/primitives';
+```
 
 ### ZTrade
-`const { ZTrade } = require('@apiance/js-primitives')`
 
-### logger
-`const createLogger = require('@apiance/js-primitives').createLogger`
+```js
+import { ZTrade } from '@apiance/primitives';
+```
+

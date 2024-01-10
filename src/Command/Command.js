@@ -21,20 +21,20 @@ const ACTIONS = {
 }
 class Command {
   static ACTIONS = ACTIONS;
-  constructor(serviceID, action, context, opts) {
+  constructor(serviceID, action, context, payload) {
     this.serviceID = serviceID;
     this.action = action;
     this.context = context;
-    this.opts = opts;
+    this.payload = payload;
   }
   toJSON(){
-    const { serviceID, action, context, opts } = this;
+    const { serviceID, action, context, payload } = this;
 
     const response = {
       serviceID, action, context
     }
-    if(opts){
-      response.opts = opts;
+    if(payload){
+      response.payload = payload;
     }
     return response;
   }
@@ -42,4 +42,4 @@ class Command {
     return JSON.stringify(this.toJSON());
   }
 };
-module.exports = Command;
+export default Command;

@@ -1,5 +1,5 @@
-const {expect} = require('chai');
-const Ticker = require('./Ticker');
+import { describe, it, expect } from "vitest";
+import Ticker from './Ticker.js';
 
 describe('Ticker', function suite() {
   let ticker;

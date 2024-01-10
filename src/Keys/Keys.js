@@ -26,4 +26,5 @@ Keys.prototype.getPrivate=function(){
 Keys.prototype.getPublic=function(){
   return this.public;
 }
-module.exports = Keys;
+
+export default Keys;

@@ -1,4 +1,6 @@
-const ZCandle = require('../../ZCandle/ZCandle');
-module.exports = function toZCandle(){
-  return new ZCandle(this.toCompressed());
+import ZCandle from '../../ZCandle/ZCandle.js';
+
+export default function toZCandle(){
+  const compressed = this.toCompressed();
+  return new ZCandle(compressed);
 }

@@ -1,7 +1,9 @@
-const MissingParameterError = require('../errors/MissingParameter')
-const { Big } = require('big.js');
-const isNum = require('../utils/isNum')
-const isString = require('../utils/isString')
+//TODO: PLEASE REMOVE BIG.JS
+import { Big } from 'big.js';
+import isNum from '../utils/isNum.js';
+import isString from '../utils/isString.js';
+import MissingParameterError from '../errors/MissingParameter.js';
+
 
 /**
  * Used to update the candle by considering last price and apply it to the candle
@@ -10,7 +12,7 @@ const isString = require('../utils/isString')
  * @return {Boolean}
  */
 
-module.exports = function considerNewLastPrice(lastPrice, amount = null, tradesQty = 0){
+export default function considerNewLastPrice(lastPrice, amount = null, tradesQty = 0){
   if(!lastPrice){
     throw new MissingParameterError('lastPrice', {lastPrice, amount});
   }
@@ -33,7 +35,8 @@ module.exports = function considerNewLastPrice(lastPrice, amount = null, tradesQ
   if(lastPrice<this.low || this.low === null) this.low = lastPrice.toString();
 
   if(tradesQty !== null){
-    this.trades = this.trades + parseInt(tradesQty);
+    const trades = parseInt(this.trades) + parseInt(tradesQty);
+    this.trades = trades.toString()
   }
 
   return true;

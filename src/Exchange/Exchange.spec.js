@@ -1,5 +1,5 @@
-const {expect} = require('chai');
-const Exchange = require('./Exchange');
+import { expect, describe, it } from 'vitest';
+import Exchange from "./Exchange.js";
 
 describe('Exchange', function suite() {
   let exchange;

@@ -1,14 +1,14 @@
-const {expect} = require('chai');
-const ZCandle = require('./ZCandle');
-const Candle = require('../Candle/Candle');
+import {expect, describe, it} from 'vitest';
+import ZCandle from './ZCandle.js';
+import Candle from '../Candle/Candle.js';
 
 describe('ZCandle', function suite() {
-    const zippedCandleStr1 = 'C::KRAKEN::BTCUSD::1d::2020-08-02T00:00:00.000Z::10000::10111::10000::10100';
-    const zippedCandleStr2 = 'C::KRAKEN::BTCUSD::1d::2020-08-02T00:00:00.000Z::10000::10111::10000::10100::42';
-    const zippedCandleStr3 = 'C::KRAKEN::BTCUSD::1d::2020-08-02T00:00:00.000Z::10000::10111::10000::10100::-151500::42';
-    const zippedCandleStr4 = 'C::KRAKEN::BTCUSD::1d::2020-08-02T00:00:00.000Z::10000::10111::10000::10100::15-151500::42';
-    const zippedCandleStr5 = 'C::KRAKEN::BTCUSD::1d::2020-08-02T00:00:00.000Z::10000::10111::10000::10100::15-::42';
-    const zippedCandleStr6 = 'C::KRAKEN::BTCUSD::1d::2020-08-02T00:00:00.000Z::10000::10111::10000::10100::15-';
+    const zippedCandleStr1 = 'C::KRAKEN::BTCUSD::1d::2020-08-02T00:00:00.000Z::C43F16FD1DCB9::10000::10111::10000::10100::0';
+    const zippedCandleStr2 = 'C::KRAKEN::BTCUSD::1d::2020-08-02T00:00:00.000Z::C43F16FD1DCB9::10000::10111::10000::10100::42';
+    const zippedCandleStr3 = 'C::KRAKEN::BTCUSD::1d::2020-08-02T00:00:00.000Z::C43F16FD1DCB9::10000::10111::10000::10100::-151500::42';
+    const zippedCandleStr4 = 'C::KRAKEN::BTCUSD::1d::2020-08-02T00:00:00.000Z::C43F16FD1DCB9::10000::10111::10000::10100::15-151500::42';
+    const zippedCandleStr5 = 'C::KRAKEN::BTCUSD::1d::2020-08-02T00:00:00.000Z::C43F16FD1DCB9::10000::10111::10000::10100::15-::42';
+    const zippedCandleStr6 = 'C::KRAKEN::BTCUSD::1d::2020-08-02T00:00:00.000Z::C43F16FD1DCB9::10000::10111::10000::10100::15-::0';
     const opts = {
         exchange: 'KRAKEN',
         symbol: 'BTCUSD',
@@ -26,7 +26,7 @@ describe('ZCandle', function suite() {
     const candle5 = new Candle({...opts, trades: "42", volume: {base: "15"}});
     const candle6 = new Candle({...opts, volume: {base: "15"}});
     it('should instantiates', () => {
-        zcandle = new ZCandle();
+        let zcandle = new ZCandle();
         expect(zcandle).to.exist;
     })
     it('should init from candle', function () {

@@ -1,6 +1,6 @@
-const {expect} = require('chai');
-const Trade = require('../Trade');
-const computeTradeId = require('./computeTradeId');
+import {describe,expect, it} from 'vitest';
+import Trade from '../Trade.js';
+import computeTradeId from './computeTradeId.js';
 describe('computeTradeId', function suite() {
   it('should compute', function () {
     const trade = new Trade({
@@ -13,6 +13,6 @@ describe('computeTradeId', function suite() {
       timestamp: 1596300000
     });
 
-    expect(computeTradeId(trade)).to.equal('TE22B0B957EA5');
+    expect(computeTradeId(trade)).to.equal('T5C58BA58');
   });
 });

@@ -1,6 +1,5 @@
-const {expect} = require('chai');
-const Persona = require('./Persona');
-
+import { describe,it, expect} from "vitest";
+import Persona from './Persona.js';
 describe('Persona', function suite() {
   let persona;
   it('should instantiates with now as default', () => {

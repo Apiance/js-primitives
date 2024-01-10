@@ -1,6 +1,7 @@
-const MissingParameterError = require('../errors/MissingParameter')
-const isString = require('../utils/isString')
-const crypto = require('crypto');
+import crypto from 'crypto'
+import MissingParameterError from '../errors/MissingParameter.js'
+import isString from '../utils/isString.js'
+
 /**
  * Used to update the candle by considering last price and apply it to the candle
  * @param lastPrice
@@ -15,7 +16,7 @@ function incrementalHash(prevHash, currentIdHash) {
 }
 
 
-module.exports = function considerTradeId(tradeId){
+export default function considerTradeId(tradeId){
   if(tradeId === undefined) throw new MissingParameterError('tradeId')
   if(!isString(tradeId)) throw new TypeError('tradeId must be a string');
 

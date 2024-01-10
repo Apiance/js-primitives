@@ -1,4 +1,4 @@
-module.exports = function format(formatStr) {
+export default function format(formatStr) {
   const date = this.toString();
   switch (formatStr) {
     case "ss":

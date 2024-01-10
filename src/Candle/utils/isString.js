@@ -1,1 +1,1 @@
-module.exports = str => typeof str === 'string';
+export default str => typeof str === 'string';

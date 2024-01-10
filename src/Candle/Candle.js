@@ -1,8 +1,15 @@
-const get = require('lodash.get');
-const Epoch = require('../Epoch/Epoch');
-const Exchange = require('../Exchange/Exchange');
-const Market = require('../Market/Market');
-const calculateCloseTime = require('./utils/calculateCloseTime');
+import getId from "./methods/getId.js";
+import toJSON from "./methods/toJSON.js";
+import toZCandle from "./methods/toZCandle.js";
+import toCompressed from "./methods/toCompressed.js";
+import isWithinInterval from "./methods/isWithinInterval.js";
+import considerTradeId from "./methods/considerTradeId.js";
+import considerNewLastPrice from "./methods/considerNewLastPrice.js";
+import Epoch from "../Epoch/Epoch.js";
+import Market from "../Market/Market.js";
+import calculateCloseTime from "./utils/calculateCloseTime.js";
+import ZCandle from "../ZCandle/ZCandle.js";
+
 const defaultOpts = {
   exchange: null,
   symbol: null,
@@ -12,17 +19,15 @@ const defaultOpts = {
   low: null,
   high: null,
   volume: { base: null, quote: null },
-  trades: 0,
+  trades: '0',
   timestamp: null,
 };
 const fromZCandle = (opts) => {
   // We put it here to avoid circ dependency
-  const ZCandle = require('../ZCandle/ZCandle');
   if(opts.constructor !== ZCandle) throw new Error('Cannot fromZCandle: Is not a ZCandle');
   return opts.toCandle();
 }
 const fromString = (opts) =>{
-  const ZCandle = require('../ZCandle/ZCandle');
   if(!opts.slice(0,3) === 'C::'){
     throw new Error('Unrecognized pattern');
   }
@@ -32,7 +37,7 @@ const fromString = (opts) =>{
   return new ZCandle({c: opts}).toCandle();
 }
 class Candle {
-  constructor(opts = defaultOpts) {
+  constructor(opts = {...defaultOpts}) {
     if(opts.constructor === String){
       return fromString(opts)
     }else if(opts.constructor !== Object){
@@ -47,17 +52,18 @@ class Candle {
       base: opts.base || null
     });
 
-    this.interval = (opts?.interval) ? get(opts, 'interval').toString() : defaultOpts.interval,
-
-    this.open = (opts?.open) ? get(opts, 'open').toString() : defaultOpts.open,
-    this.close = (opts?.close) ? get(opts, 'close').toString() : defaultOpts.close,
-    this.low = (opts?.low) ? get(opts, 'low').toString() : defaultOpts.low,
-    this.high = (opts?.low) ? get(opts, 'high').toString() : defaultOpts.high,
+    this.interval = opts?.interval?.toString() ?? defaultOpts.interval;
+    this.open = opts?.open?.toString() ?? defaultOpts.open;
+    this.close = opts?.close?.toString() ?? defaultOpts.close;
+    this.low = opts?.low?.toString() ?? defaultOpts.low;
+    this.high = opts?.high?.toString() ?? defaultOpts.high;
 
     this.volume = {
-      base: (opts?.volume?.base) ? get(opts.volume, 'base').toString() : defaultOpts.volume.base,
-      quote: (opts?.volume?.quote) ? get(opts.volume, 'quote').toString() : defaultOpts.volume.quote,
-    };
+        base: opts?.volume?.base?.toString() ?? defaultOpts.volume.base,
+        quote: opts?.volume?.quote?.toString() ?? defaultOpts.volume.quote,
+    }
+
+
 
     let openTime = opts.openTime;
     if(opts.timestamp) openTime = opts.timestamp;
@@ -76,16 +82,17 @@ class Candle {
 
     if(!this.closeTime) this.closeTime = calculateCloseTime(this);
 
-    this.trades = (opts?.trades) ? parseInt(get(opts, 'trades')) : defaultOpts.trades;
 
-    this.id = (opts?.id) ? get(opts, 'id').toString() : null;
+    this.trades = (opts?.trades) ? opts.trades.toString() : defaultOpts.trades;
+    this.id = (opts?.id) ? opts.id.toString() : null;
   }
 };
-Candle.prototype.considerNewLastPrice = require('./methods/considerNewLastPrice');
-Candle.prototype.considerTradeId = require('./methods/considerTradeId');
-Candle.prototype.isWithinInterval = require('./methods/isWithinInterval');
-Candle.prototype.toCompressed = require('./methods/toCompressed');
-Candle.prototype.toZCandle = require('./methods/toZCandle');
-Candle.prototype.toJSON = require('./methods/toJSON');
-Candle.prototype.getId = require('./methods/getId');
-module.exports = Candle;
+Candle.prototype.considerNewLastPrice = considerNewLastPrice;
+Candle.prototype.considerTradeId = considerTradeId;
+Candle.prototype.isWithinInterval = isWithinInterval;
+Candle.prototype.toCompressed = toCompressed;
+Candle.prototype.toZCandle = toZCandle;
+Candle.prototype.toJSON = toJSON;
+Candle.prototype.getId = getId;
+
+export default Candle;

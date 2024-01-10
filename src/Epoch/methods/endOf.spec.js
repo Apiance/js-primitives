@@ -1,7 +1,7 @@
-const { expect } = require('chai');
-const set = require('./set');
-const get = require('./get');
-const endOf = require('./endOf');
+import {describe,expect, it} from 'vitest';
+import set from './set.js';
+import get from './get.js';
+import endOf from './endOf.js';
 
 const initial = '2020-08-02T01:33:58.000Z';
 

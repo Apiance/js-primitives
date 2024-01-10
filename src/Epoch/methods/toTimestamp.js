@@ -1,4 +1,4 @@
-module.exports = function toTimestamp(format = 'ISO'){
+export default function toTimestamp(format = 'ISO'){
   switch (format) {
     case 'ISO':
       return this.toString();

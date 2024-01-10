@@ -1,3 +1,7 @@
+import insert from "./methods/insert.js";
+import reset from "./methods/reset.js";
+import lookupByCandleId from "./methods/lookupByCandleId.js";
+
 function fromArray(props){
   const candleSet = new CandleSet();
   props.forEach((prop)=>{
@@ -26,7 +30,8 @@ class CandleSet {
     this.candleStored = 0;
   }
 };
-CandleSet.prototype.insert = require('./methods/insert');
-CandleSet.prototype.lookupByCandleId = require('./methods/lookupByCandleId');
-CandleSet.prototype.reset = require('./methods/reset');
-module.exports = CandleSet;
+CandleSet.prototype.insert = insert;
+CandleSet.prototype.lookupByCandleId = lookupByCandleId;
+CandleSet.prototype.reset = reset;
+
+export default CandleSet;

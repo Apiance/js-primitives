@@ -1,7 +1,8 @@
-const { expect } = require('chai');
-const Trade = require('./Trade');
+import {describe,expect, it} from 'vitest';
+import Trade from './Trade.js';
 
 describe('Trade', function suite(){
+  let trade;
   const data = {
     exchange: 'BINANCE',
     symbol: 'ETHBTC',
@@ -31,8 +32,7 @@ describe('Trade', function suite(){
   })
   it('should init from props', function () {
     const tradeProp = new Trade({
-      symbol: 'BTCUSD',
-      exchange: 'KRAKEN',
+      market: 'KRAKEN::BTCUSD',
       rate: 10000,
       quantity: 1,
       timestamp: 1596300000
@@ -57,6 +57,6 @@ describe('Trade', function suite(){
       timestamp: 1596300000
     });
     const ztrade = trade.toZTrade();
-    expect(ztrade.toString()).to.equal('Z::KRAKEN::BTCUSD::2020-08-01T16:40:00.000Z::TB0DEBCCD6FA7::10000::1::-1::null::null');
+    expect(ztrade.toString()).to.equal('Z::KRAKEN::BTCUSD::2020-08-01T16:40:00.000Z::TB0DEBCC5::10000::1::-1::null::null');
   });
 });

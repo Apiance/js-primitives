@@ -1,4 +1,4 @@
-module.exports = function toZTrade(){
-  const ZTrade = require('../../ZTrade/ZTrade');
+import ZTrade from '../../ZTrade/ZTrade.js';
+export default function toZTrade(){
   return new ZTrade(this.toCompressed());
 }

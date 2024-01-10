@@ -1,9 +1,8 @@
-const { expect } = require('chai');
-const KeyChain = require('./KeyChain');
-const Keys = require('../Keys/Keys');
-
+import { describe, it, expect } from 'vitest';
+import KeyChain from "./KeyChain.js";
+import Keys from "../Keys/Keys.js";
 describe('KeyChain', function suite(){
-  this.timeout(4000);
+  // this.timeout(4000);
   let keyChain;
   const Binance = new Keys('Binance',{
     api: "12345qer",

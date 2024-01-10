@@ -1,3 +1,3 @@
-module.exports = function inspect() {
+export default function inspect() {
   return '<Epoch ' + this.toString() + '>';
 };

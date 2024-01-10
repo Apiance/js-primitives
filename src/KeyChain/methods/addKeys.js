@@ -1,12 +1,11 @@
-const logger = require('../../createLogger')({prefix:'[KeyChain]'});
-const Keys = require('../../Keys/Keys');
-module.exports = function addKeys(keys){
+import Keys from "../../Keys/Keys.js";
+
+export default function addKeys(keys){
 
   if(keys.constructor !== Keys){
     throw new Error('Not a keys');
   }
   if(this.keys[keys.name]) throw new Error(`Already existing keys for ${keys.name}`);
 
-  logger.trace(`Adding keys for ${keys.name}`);
   this.keys[keys.name] = keys;
 };

@@ -1,6 +1,5 @@
-const {expect} = require('chai');
-const EventMessage = require('./EventMessage');
-
+import {expect, describe, it} from 'vitest';
+import EventMessage from './EventMessage.js';
 describe('EventMessage', function suite() {
   const payload = {
     channel: 'candles',

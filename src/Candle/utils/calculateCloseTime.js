@@ -1,5 +1,6 @@
-const Epoch = require('../../Epoch/Epoch');
-module.exports = function calculateCloseTime(candle) {
+import Epoch from '../../Epoch/Epoch.js';
+
+export default function calculateCloseTime(candle) {
   if(candle.closeTime) return candle.closeTime;
   if(!candle.interval || !candle.openTime) return;
   const type = candle.interval.slice(-1);

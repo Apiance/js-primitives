@@ -1,4 +1,4 @@
-module.exports = function get(unit) {
+export default function get(unit) {
   let subPart;
   let lastChar;
   switch (unit) {
@@ -25,6 +25,17 @@ module.exports = function get(unit) {
     case "month":
     case "M":
       return this.date.split('-')[1];
+    case "week":
+    case "W":
+    case "w":
+        const d = new Date(this.date);
+        // Set to nearest Thursday: current date + 4 - current day number
+        // Make Sunday's day number 7
+        d.setUTCDate(d.getUTCDate() + 4 - (d.getUTCDay()||7));
+        // Get first day of year
+        const yearStart = new Date(Date.UTC(d.getUTCFullYear(),0,1));
+        const weekNo = Math.ceil(( ( (d - yearStart) / 86400000) + 1)/7).toString();
+      return weekNo;
     case "day":
     case "d":
     case "D":

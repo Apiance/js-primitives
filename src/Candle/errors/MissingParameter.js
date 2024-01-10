@@ -3,4 +3,5 @@ class MissingParameter extends Error {
     super(`Missing parameter ${parameterName}. Supplied: ${JSON.stringify(parameters)}`);
   }
 };
-module.exports = MissingParameter;
+
+export default MissingParameter;

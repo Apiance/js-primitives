@@ -3,4 +3,4 @@ class Location {
     Object.assign(this, props);
   }
 };
-module.exports = Location;
+export default Location;

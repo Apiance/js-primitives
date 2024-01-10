@@ -1,3 +1,16 @@
+import add from "./methods/add.js";
+import endOf from "./methods/endOf.js";
+import format from "./methods/format.js";
+import get from "./methods/get.js";
+import set from "./methods/set.js";
+import startOf from "./methods/startOf.js";
+import subtract from "./methods/subtract.js";
+import to from "./methods/to.js";
+import toTimestamp from "./methods/toTimestamp.js";
+import toJSON from "./methods/toJSON.js";
+import toString from "./methods/toString.js";
+import inspect from "./methods/inspect.js";
+
 class Epoch {
   constructor(props) {
     if (props) {
@@ -44,16 +57,17 @@ Epoch.Offset = {
   }
 };
 
-Epoch.prototype.add = require('./methods/add');
-Epoch.prototype.endOf = require('./methods/endOf');
-Epoch.prototype.format = require('./methods/format');
-Epoch.prototype.inspect = require('./methods/inspect');
-Epoch.prototype.get = require('./methods/get');
-Epoch.prototype.set = require('./methods/set');
-Epoch.prototype.startOf = require('./methods/startOf');
-Epoch.prototype.subtract = require('./methods/subtract');
-Epoch.prototype.to = require('./methods/to');
-Epoch.prototype.toString = require('./methods/toString');
-Epoch.prototype.toJSON = require('./methods/toJSON');
-Epoch.prototype.toTimestamp = require('./methods/toTimestamp');
-module.exports = Epoch;
+Epoch.prototype.add = add
+Epoch.prototype.endOf = endOf
+Epoch.prototype.format = format
+Epoch.prototype.inspect = inspect
+Epoch.prototype.get = get
+Epoch.prototype.set = set
+Epoch.prototype.startOf = startOf
+Epoch.prototype.subtract = subtract
+Epoch.prototype.to = to
+Epoch.prototype.toString =toString
+Epoch.prototype.toJSON = toJSON
+Epoch.prototype.toTimestamp = toTimestamp
+
+export default Epoch;

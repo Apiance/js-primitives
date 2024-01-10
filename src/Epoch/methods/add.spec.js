@@ -1,10 +1,11 @@
-const { expect } = require('chai');
-const set = require('./set');
-const get = require('./get');
-const add = require('./add');
-const to = require('./to');
-const Epoch = require('../Epoch');
+import {expect, describe, it} from 'vitest';
+import Epoch from '../Epoch.js';
+import get from './get.js';
+import set from './set.js';
+import add from './add.js';
+import to from './to.js';
 const initial = '2020-08-02T01:33:58.000Z';
+
 
 describe('Epoch.add', function suite(){
   it('should add', function () {

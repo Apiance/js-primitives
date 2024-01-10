@@ -1,5 +1,5 @@
-const {expect} = require('chai');
-const SocketMessage = require('./SocketMessage');
+import { describe,it, expect} from "vitest";
+import SocketMessage from './SocketMessage.js';
 describe('SocketMessage', function suite() {
   const payload = {
       channel: 'candles',
