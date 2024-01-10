@@ -1,6 +1,6 @@
-const Candle = require('../../Candle/Candle');
+import Candle from '../../Candle/Candle.js';
 
-module.exports = function insert(candle) {
+export default function insert(candle) {
   let { candleIds, candles } = this;
 
   if (!candle || candle.constructor !== Candle) {

@@ -1,6 +1,6 @@
-const Market = require("../Market/Market");
-const Epoch = require("../Epoch/Epoch");
-
+import Market from "../Market/Market.js";
+import Epoch from "../Epoch/Epoch.js";
+import toCompressed from "./methods/toCompressed.js";
 class Tick {
   constructor(props = {}) {
     this.market = new Market(props.market);
@@ -8,5 +8,6 @@ class Tick {
     this.timestamp = new Epoch(props.timestamp || null);
   }
 };
-Tick.prototype.toCompressed = require('./methods/toCompressed');
-module.exports = Tick;
+Tick.prototype.toCompressed = toCompressed;
+
+export default Tick;

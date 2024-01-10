@@ -1,18 +1,21 @@
-const EventEmitter = require('events');
-
+import EventEmitter from 'events';
 class Queue extends EventEmitter {
-    constructor() {
+    constructor(props={}) {
         super();
         this.queue = [];
         this.processing = false;
         this.paused = false;
         this.handler = null;
         this.processed = 0;
+
+        this.autoStart = props?.autoStart ?? true;
     }
 
     consider(object) {
         this.queue.push(object);
-        this.start();
+        if(this.autoStart){
+            this.start();
+        }
     }
 
     setHandler(handler){
@@ -25,6 +28,7 @@ class Queue extends EventEmitter {
 
         const object = this.queue.shift();
 
+        if(!this.handler) throw new Error('No handler set for queue. Use setHandler');
         await this.handler(object);
         this.processed += 1;
 
@@ -49,4 +53,4 @@ class Queue extends EventEmitter {
     }
 }
 
-module.exports = Queue
+export default Queue;

@@ -1,6 +1,7 @@
-const {expect} = require('chai');
-const Instrument = require('./Instrument');
-
+// const {expect} = require('chai');
+// const Instrument = require('./Instrument');
+import { expect, describe, it } from 'vitest';
+import Instrument from "./Instrument.js";
 describe('Instrument', function suite() {
   let instrument;
   it('should instantiates with now as default', () => {

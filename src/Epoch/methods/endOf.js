@@ -1,4 +1,4 @@
-module.exports = function endOf(unit, opts = {}) {
+export default function endOf(unit, opts = {}) {
   switch (unit) {
     case "year":
     case "Y":

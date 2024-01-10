@@ -1,5 +1,5 @@
-const computeCandleId = require("../utils/computeCandleId");
-module.exports = function toCompressed() {
+import computeCandleId from '../utils/computeCandleId.js';
+export default function toCompressed() {
     const {market, interval, openTime, open, close, low, high, volume, trades} = this;
     let id = this.id;
     if (id === null) {

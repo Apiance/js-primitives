@@ -3,4 +3,4 @@ class Persona {
     Object.assign(this, props);
   }
 };
-module.exports = Persona;
+export default Persona;

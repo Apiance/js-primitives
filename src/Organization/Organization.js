@@ -3,4 +3,4 @@ class Organization {
     Object.assign(this, props);
   }
 };
-module.exports = Organization;
+export default Organization;

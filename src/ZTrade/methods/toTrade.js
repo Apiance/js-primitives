@@ -1,6 +1,5 @@
-const Trade = require('../../Trade/Trade');
-
-module.exports = function toTrade() {
+import Trade from '../../Trade/Trade.js';
+export default function toTrade() {
   const { z } = this;
   const opts = {};
   const optsProps = [null, 'exchange', 'market', 'timestamp', 'id', 'rate', 'quantity','side', 'buyOrderId', 'sellOrderId'];

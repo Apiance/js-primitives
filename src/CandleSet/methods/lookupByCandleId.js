@@ -1,4 +1,4 @@
-module.exports = function lookupByCandleId(id) {
+export default function lookupByCandleId(id) {
   const index = this.candleIds.indexOf(id);
   if (index === -1) {
     return null;

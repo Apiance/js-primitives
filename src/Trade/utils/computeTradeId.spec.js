@@ -1,6 +1,6 @@
-const {expect} = require('chai');
-const Trade = require('../Trade');
-const computeTradeId = require('./computeTradeId');
+import {describe,expect, it} from 'vitest';
+import Trade from '../Trade.js';
+import computeTradeId from './computeTradeId.js';
 describe('computeTradeId', function suite() {
   it('should compute', function () {
     const trade = new Trade({

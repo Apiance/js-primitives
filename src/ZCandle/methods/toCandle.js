@@ -1,6 +1,5 @@
-module.exports = function toCandle() {
-  const Candle = require('../../Candle/Candle');
-
+import Candle from '../../Candle/Candle.js';
+export default function toCandle() {
   const {c} = this;
   const opts = {};
 

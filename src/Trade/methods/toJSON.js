@@ -1,4 +1,4 @@
-module.exports = function toJSON(){
+export default function toJSON(){
   const { id, rate, quantity, side, buyOrderId, sellOrderId, timestamp } = this;
   const market = this.market.toJSON();
   return {

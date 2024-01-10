@@ -1,11 +1,10 @@
-const { expect } = require('chai');
-const set = require('./set');
-const get = require('./get');
-const subtract = require('./subtract');
-const to = require('./to');
-const Epoch = require('../Epoch');
 const initial = '2020-08-02T01:33:58.000Z';
-
+import { describe, it, expect } from "vitest";
+import set   from "./set.js";
+import get   from "./get.js";
+import subtract   from "./subtract.js";
+import to   from "./to.js";
+import Epoch   from "../Epoch.js";
 describe('Epoch.subtract', function suite(){
   it('should subtract', function () {
     const mockDate = {

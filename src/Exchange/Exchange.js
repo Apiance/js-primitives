@@ -8,4 +8,4 @@ class Exchange {
     return this.name.toString();
   }
 }
-module.exports = Exchange;
+export default Exchange;

@@ -1,7 +1,6 @@
-const { expect } = require('chai');
-const set = require('./set');
-const get = require('./get');
-
+import {expect,describe, it} from 'vitest';
+import set from './set.js';
+import get from './get.js';
 describe('Epoch.set', function suite(){
   it('should set', function () {
     const mockDate = {

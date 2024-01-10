@@ -1,4 +1,4 @@
-module.exports = function to(unit = 's') {
+export default function to(unit = 's') {
   switch (unit) {
     case "ns":
     case "nanosecond":

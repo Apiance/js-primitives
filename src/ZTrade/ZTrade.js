@@ -1,3 +1,5 @@
+import toTrade from "./methods/toTrade.js";
+
 class ZTrade {
   constructor(props) {
     if(props){
@@ -29,5 +31,5 @@ ZTrade.fromObject = function(object) {
   return new ZTrade(z)
 }
 
-ZTrade.prototype.toTrade = require('./methods/toTrade');
-module.exports = ZTrade;
+ZTrade.prototype.toTrade = toTrade;
+export default ZTrade;

@@ -1,6 +1,5 @@
-const {expect} = require('chai');
-const Tick = require('./Tick');
-
+import { expect, describe, it } from 'vitest';
+import Tick from './Tick.js';
 describe('Tick', function suite() {
   let ticker;
   it('should instantiates with now as default', () => {
@@ -10,7 +9,8 @@ describe('Tick', function suite() {
   it('should init from params', function () {
     ticker = new Tick({
       market: {
-        symbol:"ABCUSD"
+        symbol:"ABCUSD",
+        exchange: 'FAKEEXCHANGE',
       }
     });
     expect(ticker.market.symbol).to.deep.equal('ABCUSD');

@@ -39,4 +39,5 @@ class SocketMessage {
     return JSON.stringify(this.toJSON());
   }
 };
-module.exports = SocketMessage;
+
+export default SocketMessage;

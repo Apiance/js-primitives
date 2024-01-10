@@ -1,5 +1,6 @@
-let milliSecondsInTimeframe = require('../utils/getTimeframeDurationInMilliseconds');
-module.exports = function add(unit, value) {
+import getTimeframeDurationInMilliseconds from "../utils/getTimeframeDurationInMilliseconds.js";
+
+export default function add(unit, value) {
     const curYear = this.get('year');
     switch (unit) {
         case "year":
@@ -32,7 +33,7 @@ module.exports = function add(unit, value) {
             dh.setUTCHours(dh.getUTCHours() + (value))
             this.date = new this.constructor({date: dh.toISOString()}).date
             return this;
-            this.date = this.constructor.fromNumber(this.to('ms') + value * milliSecondsInTimeframe("h")).date;
+            this.date = this.constructor.fromNumber(this.to('ms') + value * getTimeframeDurationInMilliseconds("h")).date;
             return this;
         case "minute":
         case "min":

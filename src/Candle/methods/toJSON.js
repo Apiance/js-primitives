@@ -1,4 +1,4 @@
-const computeCandleId = require("../utils/computeCandleId");
+import computeCandleId from '../utils/computeCandleId.js';
 
 function toJSON() {
     const {
@@ -37,4 +37,4 @@ function toJSON() {
         trades
     }
 };
-module.exports = toJSON;
+export default toJSON;

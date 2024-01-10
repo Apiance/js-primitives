@@ -1,4 +1,4 @@
-import { expect } from 'chai';
+import {expect, describe, it} from 'vitest';
 import Asset from './Asset.js';
 describe('Asset', function suite() {
   let asset;

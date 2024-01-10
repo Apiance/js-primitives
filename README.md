@@ -56,6 +56,3 @@
 
 ### ZTrade
 `const { ZTrade } = require('@apiance/js-primitives')`
-
-### logger
-`const createLogger = require('@apiance/js-primitives').createLogger`

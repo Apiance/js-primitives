@@ -1,5 +1,5 @@
-const { expect } = require('chai');
-const Trade = require('./Trade');
+import {describe,expect, it} from 'vitest';
+import Trade from './Trade.js';
 
 describe('Trade', function suite(){
   let trade;
@@ -32,8 +32,7 @@ describe('Trade', function suite(){
   })
   it('should init from props', function () {
     const tradeProp = new Trade({
-      symbol: 'BTCUSD',
-      exchange: 'KRAKEN',
+      market: 'KRAKEN::BTCUSD',
       rate: 10000,
       quantity: 1,
       timestamp: 1596300000

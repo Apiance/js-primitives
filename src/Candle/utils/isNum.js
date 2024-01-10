@@ -1,1 +1,1 @@
-module.exports = num => !Number.isNaN(num) && typeof num === 'number';
+export default num => !Number.isNaN(num) && typeof num === 'number';

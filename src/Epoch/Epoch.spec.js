@@ -1,6 +1,5 @@
-const {expect} = require('chai');
-const Epoch = require('./Epoch');
-
+import {expect, describe, it} from 'vitest';
+import Epoch from './Epoch.js';
 describe('Epoch', function suite() {
     let epoch;
     let controlDate;

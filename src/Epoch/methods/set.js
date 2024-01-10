@@ -1,4 +1,4 @@
-module.exports = function set(unit, value) {
+export default function set(unit, value) {
   const timeSplitIndex = this.date.indexOf('T')
   const splittedDate = this.date.split('-');
   const splittedTime = this.date.split(':');

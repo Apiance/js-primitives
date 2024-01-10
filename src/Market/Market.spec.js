@@ -31,6 +31,13 @@ const CASES = [
         base: 'BTC',
         type: Market.MARKET_TYPES.SPOT
     }],
+    ['SOMETHING::ABCDEF',{
+        exchange: 'SOMETHING',
+        symbol: 'ABCDEF',
+        type: Market.MARKET_TYPES.PERP,
+        quote: 'DEF',
+        base: 'ABC',
+    }]
 ]
 
 

@@ -3,4 +3,4 @@ class Ticker {
     Object.assign(this, props);
   }
 };
-module.exports = Ticker;
+export default Ticker;

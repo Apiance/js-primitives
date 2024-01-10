@@ -1,6 +1,5 @@
-const { expect } = require('chai');
-const get = require('./get');
-
+import {expect,describe, it} from "vitest";
+import get from './get.js';
 describe('Epoch.get', function suite(){
   it('should get', function () {
     const mockDate = {

@@ -1,7 +1,8 @@
-const { expect } = require('chai');
-const Candle = require('./Candle');
-const ZCandle = require('../ZCandle/ZCandle');
-const Epoch = require('../Epoch/Epoch')
+import {expect, describe, it} from 'vitest';
+import Candle from "./Candle.js";
+import ZCandle from "../ZCandle/ZCandle.js";
+import Epoch from "../Epoch/Epoch.js";
+
 describe('Candle', function suite(){
   const opts = {
     exchange: "KRAKEN",
@@ -132,7 +133,7 @@ describe('Candle', function suite(){
 
   it('should deal with trades', function () {
     const x = {
-        market: "KRAKEN::P-BTC-USD",
+        market: "KRAKEN::BTC-USD",
         interval: '1d',
         openTime: '2020-08-02T00:00:00.142Z',
         closeTime: '2020-08-02T00:59:59.999Z',
@@ -144,7 +145,7 @@ describe('Candle', function suite(){
         trades: 60
     };
     const fullCandle = new Candle(x);
-    expect(fullCandle.toCompressed()).to.equal('C::KRAKEN::P-BTC-USD::1d::2020-08-02T00:00:00.000Z::C90B8A9C5D7C9::10000::10111::10000::10100::0.01-100::60');
+    expect(fullCandle.toCompressed()).to.equal('C::KRAKEN::BTC-USD::1d::2020-08-02T00:00:00.000Z::C750489FC6F37::10000::10111::10000::10100::0.01-100::60');
   });
   it('should toCompressed', function () {
     const opts = {
@@ -194,9 +195,9 @@ describe('Candle', function suite(){
     expect(json.market).to.deep.equal({
       exchange: 'BINANCE',
       symbol: 'BTCUSD',
-      base: null,
-      quote: null,
-      type: null,
+      base: "BTC",
+      quote: "USD",
+      type: "PERP",
     });
     expect(json.interval).to.deep.equal('10s');
     expect(json.open).to.deep.equal('19130');

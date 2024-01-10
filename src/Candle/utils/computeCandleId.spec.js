@@ -1,6 +1,7 @@
-const {expect} = require('chai');
-const Candle = require('../Candle');
-const computeCandleId = require('./computeCandleId');
+import {expect} from "chai";
+import Candle from "../Candle.js";
+import computeCandleId from "./computeCandleId.js";
+
 describe('computeTradeId', function suite() {
     it('should compute', function () {
         const candle = new Candle({

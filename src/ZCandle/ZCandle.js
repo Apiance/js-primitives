@@ -1,3 +1,5 @@
+import toCandle from "./methods/toCandle.js";
+
 class ZCandle {
   constructor(props) {
     if(props){
@@ -50,5 +52,6 @@ ZCandle.fromObject = function(object) {
   return new ZCandle(z)
 }
 
-ZCandle.prototype.toCandle = require('./methods/toCandle');
-module.exports = ZCandle;
+ZCandle.prototype.toCandle = toCandle;
+
+export default ZCandle;

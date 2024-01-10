@@ -1,7 +1,11 @@
-const Market = require('../Market/Market');
-const Epoch = require('../Epoch/Epoch');
-console.log('Trade Epoch', Epoch.constructor);
-const computeTradeId = require('./utils/computeTradeId.js');
+import Market from "../Market/Market.js";
+import Epoch from "../Epoch/Epoch.js";
+import computeTradeId from "./utils/computeTradeId.js";
+import toZTrade from "./methods/toZTrade.js";
+import toJSON from "./methods/toJSON.js";
+import toID from "./methods/toID.js";
+import toCompressed from "./methods/toCompressed.js";
+
 class Trade {
   /**
    *
@@ -9,7 +13,10 @@ class Trade {
    * @param {Date.toUTC} props.timestamp - UTC ISO Timestamp
    */
   constructor(props = {}) {
-    this.market = new Market(props.market);
+    this.market = null;
+    if(props.market){
+        this.market = new Market(props.market);
+    }
 
 
     this.rate = props.rate || null;
@@ -23,8 +30,8 @@ class Trade {
     this.id = props.id || computeTradeId(this)
   }
 };
-Trade.prototype.toCompressed = require('./methods/toCompressed')
-Trade.prototype.toID = require('./methods/toID')
-Trade.prototype.toJSON = require('./methods/toJSON')
-Trade.prototype.toZTrade = require('./methods/toZTrade')
-module.exports = Trade;
+Trade.prototype.toCompressed = toCompressed;
+Trade.prototype.toID = toID;
+Trade.prototype.toJSON = toJSON;
+Trade.prototype.toZTrade = toZTrade
+export default Trade;

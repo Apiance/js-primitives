@@ -3,4 +3,4 @@ class Person {
     Object.assign(this, props);
   }
 };
-module.exports = Person;
+export default Person;

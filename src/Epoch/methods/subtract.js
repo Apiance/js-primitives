@@ -1,6 +1,6 @@
-let getTimeframeDurationInMilliseconds = require('../utils/getTimeframeDurationInMilliseconds');
 
-module.exports = function subtract(unit, value) {
+import getTimeframeDurationInMilliseconds from '../utils/getTimeframeDurationInMilliseconds.js';
+export default function subtract(unit, value) {
   const curYear = this.get('year');
   switch (unit) {
     case "year":

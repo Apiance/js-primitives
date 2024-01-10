@@ -1,4 +1,4 @@
-module.exports = function toCompressed(){
+export default function toCompressed(){
   const market = this.market;
   const side = (this.side === 'BUY') ? 1 : -1;
   const { timestamp, id, rate, quantity, buyOrderId, sellOrderId} = this;

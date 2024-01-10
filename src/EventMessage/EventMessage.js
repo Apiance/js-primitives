@@ -23,4 +23,4 @@ class EventMessage {
     return JSON.stringify(this.toJSON())
   }
 };
-module.exports = EventMessage;
+export default EventMessage;

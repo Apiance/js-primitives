@@ -1,6 +1,6 @@
-const { expect } = require('chai');
-const Candle = require('../Candle/Candle');
-const CandleSet = require('./CandleSet');
+import {expect, describe, it} from 'vitest';
+import Candle from "../Candle/Candle.js";
+import CandleSet from "./CandleSet.js";
 
 describe('Candle', function suite(){
   const opts1 = {

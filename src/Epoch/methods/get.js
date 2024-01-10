@@ -1,4 +1,4 @@
-module.exports = function get(unit) {
+export default function get(unit) {
   let subPart;
   let lastChar;
   switch (unit) {
