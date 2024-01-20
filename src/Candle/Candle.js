@@ -9,6 +9,7 @@ import Epoch from "../Epoch/Epoch.js";
 import Market from "../Market/Market.js";
 import calculateCloseTime from "./utils/calculateCloseTime.js";
 import ZCandle from "../ZCandle/ZCandle.js";
+import getPath from "./methods/getPath.js";
 
 const defaultOpts = {
   exchange: null,
@@ -94,5 +95,6 @@ Candle.prototype.toCompressed = toCompressed;
 Candle.prototype.toZCandle = toZCandle;
 Candle.prototype.toJSON = toJSON;
 Candle.prototype.getId = getId;
+Candle.prototype.getPath = getPath;
 
 export default Candle;

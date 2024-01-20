@@ -46,7 +46,7 @@ describe('Candle', function suite(){
     expect(candle.openTime).to.deep.equal(new Epoch('2020-08-02T00:00:00.000Z'));
     expect(candle.closeTime).to.deep.equal(new Epoch('2020-08-02T23:59:59.999Z'));
 
-    expect(candle.getId()).to.equal('KRAKEN/BTCUSD/1d/2020/08/02/2020-08-02T00:00:00.000Z');
+    expect(candle.getPath()).to.equal('KRAKEN/BTCUSD/1d/2020/08/02/2020-08-02T00:00:00.000Z');
 
 
      candle1 = new Candle(opts1);
@@ -233,5 +233,14 @@ describe('Candle', function suite(){
     expect(json.low).to.equal('19557');
     expect(json.high).to.equal('19564');
     expect(json.volume).to.deep.equal({ base: '2.96', quote: '57894.72' });
+
+
+    // Dealing with getId / getPath
+    expect(c.getId().length).to.equal(13);
+    expect(c.getId()).to.equal(c.getId());
+    expect(c.getId()[0]).to.equal("C");
+    const time = 1705764582472;
+    c.openTime = new Epoch(time);
+    expect(c.getPath()).to.equal("FTX/BTC-PERP/10s/2024/01/20/2024-01-20T15:29:42.472Z");
   });
 });

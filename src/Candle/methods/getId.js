@@ -1,4 +1,10 @@
-import generateId from '../utils/generateId.js';
+import computeCandleId from "../utils/computeCandleId.js";
+
 export default function getId() {
-  return generateId(this.market, this.interval, this.openTime);
+    const { market, interval, openTime, open, high, low, close } = this;
+  return this.id ?? computeCandleId({
+    toCompressed: () => {
+      return `C::${market}::${interval}::${openTime}::${open}::${high}::${low}::${close}`;
+    }
+  });
 }
