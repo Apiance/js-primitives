@@ -1,4 +1,5 @@
 import toCandle from "./methods/toCandle.js";
+import getId from "./methods/getId.js";
 
 class ZCandle {
   constructor(props) {
@@ -53,5 +54,5 @@ ZCandle.fromObject = function(object) {
 }
 
 ZCandle.prototype.toCandle = toCandle;
-
+ZCandle.prototype.getId = getId;
 export default ZCandle;
